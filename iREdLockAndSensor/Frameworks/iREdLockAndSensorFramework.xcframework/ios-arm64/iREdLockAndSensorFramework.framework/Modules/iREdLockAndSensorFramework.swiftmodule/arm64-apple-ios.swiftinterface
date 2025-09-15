@@ -1,0 +1,77 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
+// swift-module-flags: -target arm64-apple-ios17.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name iREdLockAndSensorFramework
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+import CommonCrypto
+import CoreBluetooth
+import Foundation
+import Swift
+import SwiftUI
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@_hasMissingDesignatedInitializers @_Concurrency.MainActor public class LockAndSensor {
+  public protocol LockAndSensorFrameworkDelegate : AnyObject {
+    func lockCallback(didDecode response: iREdLockAndSensorFramework.LockAndSensor.LockResponse)
+    func doorSensorCallback(deviceAddress: Swift.String?, didDecodeSensor response: iREdLockAndSensorFramework.LockAndSensor.SensorResponse)
+  }
+  @_Concurrency.MainActor weak public static var delegate: (any iREdLockAndSensorFramework.LockAndSensor.LockAndSensorFrameworkDelegate)?
+  @objc deinit
+}
+extension iREdLockAndSensorFramework.LockAndSensor {
+  @_Concurrency.MainActor public static func setLockCredentials(fromQRCode base64String: Swift.String)
+  @_Concurrency.MainActor public static func getLocksCredentialsMACAddress() -> [Swift.String]
+  @_Concurrency.MainActor public static func getLockCredentialsMACAddress(qrCodeString: Swift.String) -> Swift.String?
+  @_Concurrency.MainActor public static func getLockMAC(manufacturerData: Foundation.Data) -> Swift.String?
+  @_Concurrency.MainActor public static func isLock(peripheral: CoreBluetooth.CBPeripheral, manufacturerData data: Foundation.Data) -> Swift.Bool
+  @_Concurrency.MainActor public static func BLE_RequestTokenCommand(deviceAddress mac: Swift.String) throws -> Foundation.Data
+  @_Concurrency.MainActor public static func BLE_UnlockCommand(deviceAddress mac: Swift.String, tempToken: Foundation.Data) throws -> Foundation.Data
+  @_Concurrency.MainActor public static func BLE_LockStatusCommand(deviceAddress mac: Swift.String, tempToken: Foundation.Data) throws -> Foundation.Data
+  @_Concurrency.MainActor public static func BLE_AddCardCommand(deviceAddress mac: Swift.String, tempToken: Foundation.Data) throws -> Foundation.Data
+  @_Concurrency.MainActor public static func BLE_QueryCardCountCommand(deviceAddress mac: Swift.String, tempToken: Foundation.Data) throws -> Foundation.Data
+  @_Concurrency.MainActor public static func BLE_DeleteAllCardsCommand(deviceAddress mac: Swift.String, tempToken: Foundation.Data) throws -> Foundation.Data
+  @_Concurrency.MainActor public static func CreteHttpPostBody_GenerateOTP(credentials: Swift.String, expiredTime: Swift.Int, otpKey: Swift.String) async
+  @_Concurrency.MainActor public static func CreteHttpPostBody_HandleBleResponseCommand(oneTimePassword otp: Swift.String, bleResponse: Foundation.Data, otpKey: Swift.String) async
+  @_Concurrency.MainActor public static func CreteHttpPostBody_GetMACAddressAndTokenCommand(oneTimePassword: Swift.String, otpKey: Swift.String) async
+  @_Concurrency.MainActor public static func CreteHttpPostBody_InvalidateOTPCommand(oneTimePassword: Swift.String, otpKey: Swift.String) async
+  @_Concurrency.MainActor public static func decodBleLockData(deviceAddress: Swift.String?, encrypted data: Foundation.Data)
+  public enum LockCardType {
+    case ic
+    case id
+    public static func == (a: iREdLockAndSensorFramework.LockAndSensor.LockCardType, b: iREdLockAndSensorFramework.LockAndSensor.LockCardType) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum LockResponse {
+    case register(qrCodeString: Swift.String, deviceAddress: Swift.String?, isSuccess: Swift.Bool)
+    case tokenRecievedEvent(deviceAddress: Swift.String, token: Foundation.Data, batteryPercentage: Swift.Int)
+    case unlockResponseEvent(deviceAddress: Swift.String, isLocked: Swift.Bool)
+    case queryLockStatus(deviceAddress: Swift.String, isLocked: Swift.Bool)
+    case addCardEvent(deviceAddress: Swift.String, isSuccess: Swift.Bool, cardType: iREdLockAndSensorFramework.LockAndSensor.LockCardType?)
+    case deleteAllCardEvent(deviceAddress: Swift.String, isSuccess: Swift.Bool)
+    case queryCardCountEvent(deviceAddress: Swift.String, icCardCount: Swift.Int, idCardCount: Swift.Int)
+    case otpReceivedEvent(otp: Swift.String, expiredTime: Swift.Int)
+    case otpInvalidateOTPEvent(otp: Swift.String, isSuccess: Swift.Bool)
+    case otpLockStatusEvent(otp: Swift.String, isLocked: Swift.Bool)
+    case macAddressAndTokenCommandEvent(otp: Swift.String, deviceAddress: Swift.String?, requestTokenCommand: Foundation.Data?)
+    case lockDataAndUnlockCommand(otp: Swift.String, unlockCommand: Foundation.Data?, batteryPercent: Swift.Int?)
+    case unknown(raw: Foundation.Data)
+  }
+}
+extension iREdLockAndSensorFramework.LockAndSensor {
+  @_Concurrency.MainActor public static func setSensorCredentials(fromQRCode qrCode: Swift.String)
+  @_Concurrency.MainActor public static func handleSensorBroadcast(peripheral: CoreBluetooth.CBPeripheral, manufacturerData data: Foundation.Data)
+  @_Concurrency.MainActor public static func isSensor(peripheral: CoreBluetooth.CBPeripheral, manufacturerData data: Foundation.Data) -> Swift.Bool
+  @_Concurrency.MainActor public static func getSensorMAC(manufacturerData: Foundation.Data) -> Swift.String?
+  public enum SensorResponse : Swift.Equatable {
+    case register(qrCodeString: Swift.String, isSuccess: Swift.Bool)
+    case batteryLevelEvent(deviceAddress: Swift.String, batteryPercentage: Swift.Int)
+    case doorStatusEvent(deviceAddress: Swift.String, isDoorOpen: Swift.Bool, isDisassembled: Swift.Bool)
+    public static func == (a: iREdLockAndSensorFramework.LockAndSensor.SensorResponse, b: iREdLockAndSensorFramework.LockAndSensor.SensorResponse) -> Swift.Bool
+  }
+}
+extension iREdLockAndSensorFramework.LockAndSensor : Swift.Sendable {}
+extension iREdLockAndSensorFramework.LockAndSensor.LockCardType : Swift.Equatable {}
+extension iREdLockAndSensorFramework.LockAndSensor.LockCardType : Swift.Hashable {}

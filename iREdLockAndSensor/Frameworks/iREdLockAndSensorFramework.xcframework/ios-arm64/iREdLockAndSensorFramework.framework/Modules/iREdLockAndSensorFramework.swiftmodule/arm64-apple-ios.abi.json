@@ -1,0 +1,2586 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "iREdLockAndSensorFramework",
+    "printedName": "iREdLockAndSensorFramework",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "iREdLockAndSensorFramework",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "CoreBluetooth",
+        "printedName": "CoreBluetooth",
+        "declKind": "Import",
+        "moduleName": "iREdLockAndSensorFramework"
+      },
+      {
+        "kind": "Import",
+        "name": "CommonCrypto",
+        "printedName": "CommonCrypto",
+        "declKind": "Import",
+        "moduleName": "iREdLockAndSensorFramework"
+      },
+      {
+        "kind": "Import",
+        "name": "SwiftUI",
+        "printedName": "SwiftUI",
+        "declKind": "Import",
+        "moduleName": "iREdLockAndSensorFramework"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "LockAndSensor",
+        "printedName": "LockAndSensor",
+        "children": [
+          {
+            "kind": "TypeDecl",
+            "name": "LockAndSensorFrameworkDelegate",
+            "printedName": "LockAndSensorFrameworkDelegate",
+            "children": [
+              {
+                "kind": "Function",
+                "name": "lockCallback",
+                "printedName": "lockCallback(didDecode:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "LockResponse",
+                    "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                    "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0bcdE8DelegateP12lockCallback9didDecodeyAC0B8ResponseO_tF",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0bcdE8DelegateP12lockCallback9didDecodeyAC0B8ResponseO_tF",
+                "moduleName": "iREdLockAndSensorFramework",
+                "genericSig": "<τ_0_0 where τ_0_0 : iREdLockAndSensorFramework.LockAndSensor.LockAndSensorFrameworkDelegate>",
+                "sugared_genericSig": "<Self where Self : iREdLockAndSensorFramework.LockAndSensor.LockAndSensorFrameworkDelegate>",
+                "protocolReq": true,
+                "reqNewWitnessTableEntry": true,
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Function",
+                "name": "doorSensorCallback",
+                "printedName": "doorSensorCallback(deviceAddress:didDecodeSensor:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SensorResponse",
+                    "printedName": "iREdLockAndSensorFramework.LockAndSensor.SensorResponse",
+                    "usr": "s:26iREdLockAndSensorFramework0bcD0C0D8ResponseO"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0bcdE8DelegateP04doorD8Callback13deviceAddress09didDecodeD0ySSSg_AC0D8ResponseOtF",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0bcdE8DelegateP04doorD8Callback13deviceAddress09didDecodeD0ySSSg_AC0D8ResponseOtF",
+                "moduleName": "iREdLockAndSensorFramework",
+                "genericSig": "<τ_0_0 where τ_0_0 : iREdLockAndSensorFramework.LockAndSensor.LockAndSensorFrameworkDelegate>",
+                "sugared_genericSig": "<Self where Self : iREdLockAndSensorFramework.LockAndSensor.LockAndSensorFrameworkDelegate>",
+                "protocolReq": true,
+                "reqNewWitnessTableEntry": true,
+                "funcSelfKind": "NonMutating"
+              }
+            ],
+            "declKind": "Protocol",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C0bcdE8DelegateP",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0bcdE8DelegateP",
+            "moduleName": "iREdLockAndSensorFramework",
+            "genericSig": "<τ_0_0 : AnyObject>",
+            "sugared_genericSig": "<Self : AnyObject>",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "delegate",
+            "printedName": "delegate",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "WeakStorage",
+                "printedName": "(any iREdLockAndSensorFramework.LockAndSensor.LockAndSensorFrameworkDelegate)?"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C8delegateAC0bcdE8Delegate_pSgvpZ",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C8delegateAC0bcdE8Delegate_pSgvpZ",
+            "moduleName": "iREdLockAndSensorFramework",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "Custom",
+              "HasStorage",
+              "ReferenceOwnership",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "ownership": 1,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "(any iREdLockAndSensorFramework.LockAndSensor.LockAndSensorFrameworkDelegate)?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "LockAndSensorFrameworkDelegate",
+                        "printedName": "any iREdLockAndSensorFramework.LockAndSensor.LockAndSensorFrameworkDelegate",
+                        "usr": "s:26iREdLockAndSensorFramework0bcD0C0bcdE8DelegateP"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C8delegateAC0bcdE8Delegate_pSgvgZ",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C8delegateAC0bcdE8Delegate_pSgvgZ",
+                "moduleName": "iREdLockAndSensorFramework",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "(any iREdLockAndSensorFramework.LockAndSensor.LockAndSensorFrameworkDelegate)?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "LockAndSensorFrameworkDelegate",
+                        "printedName": "any iREdLockAndSensorFramework.LockAndSensor.LockAndSensorFrameworkDelegate",
+                        "usr": "s:26iREdLockAndSensorFramework0bcD0C0bcdE8DelegateP"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C8delegateAC0bcdE8Delegate_pSgvsZ",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C8delegateAC0bcdE8Delegate_pSgvsZ",
+                "moduleName": "iREdLockAndSensorFramework",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C8delegateAC0bcdE8Delegate_pSgvMZ",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C8delegateAC0bcdE8Delegate_pSgvMZ",
+                "moduleName": "iREdLockAndSensorFramework",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "setLockCredentials",
+            "printedName": "setLockCredentials(fromQRCode:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C03setB11Credentials10fromQRCodeySS_tFZ",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C03setB11Credentials10fromQRCodeySS_tFZ",
+            "moduleName": "iREdLockAndSensorFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getLocksCredentialsMACAddress",
+            "printedName": "getLocksCredentialsMACAddress()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[Swift.String]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C29getLocksCredentialsMACAddressSaySSGyFZ",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C29getLocksCredentialsMACAddressSaySSGyFZ",
+            "moduleName": "iREdLockAndSensorFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getLockCredentialsMACAddress",
+            "printedName": "getLockCredentialsMACAddress(qrCodeString:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C03getB21CredentialsMACAddress12qrCodeStringSSSgSS_tFZ",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C03getB21CredentialsMACAddress12qrCodeStringSSSgSS_tFZ",
+            "moduleName": "iREdLockAndSensorFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getLockMAC",
+            "printedName": "getLockMAC(manufacturerData:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C03getB3MAC16manufacturerDataSSSg10Foundation0I0V_tFZ",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C03getB3MAC16manufacturerDataSSSg10Foundation0I0V_tFZ",
+            "moduleName": "iREdLockAndSensorFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "isLock",
+            "printedName": "isLock(peripheral:manufacturerData:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C02isB010peripheral16manufacturerDataSbSo12CBPeripheralC_10Foundation0I0VtFZ",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C02isB010peripheral16manufacturerDataSbSo12CBPeripheralC_10Foundation0I0VtFZ",
+            "moduleName": "iREdLockAndSensorFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "BLE_RequestTokenCommand",
+            "printedName": "BLE_RequestTokenCommand(deviceAddress:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C23BLE_RequestTokenCommand13deviceAddress10Foundation4DataVSS_tKFZ",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C23BLE_RequestTokenCommand13deviceAddress10Foundation4DataVSS_tKFZ",
+            "moduleName": "iREdLockAndSensorFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "BLE_UnlockCommand",
+            "printedName": "BLE_UnlockCommand(deviceAddress:tempToken:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C17BLE_UnlockCommand13deviceAddress9tempToken10Foundation4DataVSS_AItKFZ",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C17BLE_UnlockCommand13deviceAddress9tempToken10Foundation4DataVSS_AItKFZ",
+            "moduleName": "iREdLockAndSensorFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "BLE_LockStatusCommand",
+            "printedName": "BLE_LockStatusCommand(deviceAddress:tempToken:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C04BLE_B13StatusCommand13deviceAddress9tempToken10Foundation4DataVSS_AItKFZ",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C04BLE_B13StatusCommand13deviceAddress9tempToken10Foundation4DataVSS_AItKFZ",
+            "moduleName": "iREdLockAndSensorFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "BLE_AddCardCommand",
+            "printedName": "BLE_AddCardCommand(deviceAddress:tempToken:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C18BLE_AddCardCommand13deviceAddress9tempToken10Foundation4DataVSS_AItKFZ",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C18BLE_AddCardCommand13deviceAddress9tempToken10Foundation4DataVSS_AItKFZ",
+            "moduleName": "iREdLockAndSensorFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "BLE_QueryCardCountCommand",
+            "printedName": "BLE_QueryCardCountCommand(deviceAddress:tempToken:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C25BLE_QueryCardCountCommand13deviceAddress9tempToken10Foundation4DataVSS_AItKFZ",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C25BLE_QueryCardCountCommand13deviceAddress9tempToken10Foundation4DataVSS_AItKFZ",
+            "moduleName": "iREdLockAndSensorFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "BLE_DeleteAllCardsCommand",
+            "printedName": "BLE_DeleteAllCardsCommand(deviceAddress:tempToken:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C25BLE_DeleteAllCardsCommand13deviceAddress9tempToken10Foundation4DataVSS_AItKFZ",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C25BLE_DeleteAllCardsCommand13deviceAddress9tempToken10Foundation4DataVSS_AItKFZ",
+            "moduleName": "iREdLockAndSensorFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "CreteHttpPostBody_GenerateOTP",
+            "printedName": "CreteHttpPostBody_GenerateOTP(credentials:expiredTime:otpKey:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C29CreteHttpPostBody_GenerateOTP11credentials11expiredTime6otpKeyySS_SiSStYaFZ",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C29CreteHttpPostBody_GenerateOTP11credentials11expiredTime6otpKeyySS_SiSStYaFZ",
+            "moduleName": "iREdLockAndSensorFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "CreteHttpPostBody_HandleBleResponseCommand",
+            "printedName": "CreteHttpPostBody_HandleBleResponseCommand(oneTimePassword:bleResponse:otpKey:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C42CreteHttpPostBody_HandleBleResponseCommand15oneTimePassword03bleL06otpKeyySS_10Foundation4DataVSStYaFZ",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C42CreteHttpPostBody_HandleBleResponseCommand15oneTimePassword03bleL06otpKeyySS_10Foundation4DataVSStYaFZ",
+            "moduleName": "iREdLockAndSensorFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "CreteHttpPostBody_GetMACAddressAndTokenCommand",
+            "printedName": "CreteHttpPostBody_GetMACAddressAndTokenCommand(oneTimePassword:otpKey:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C031CreteHttpPostBody_GetMACAddressC12TokenCommand15oneTimePassword6otpKeyySS_SStYaFZ",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C031CreteHttpPostBody_GetMACAddressC12TokenCommand15oneTimePassword6otpKeyySS_SStYaFZ",
+            "moduleName": "iREdLockAndSensorFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "CreteHttpPostBody_InvalidateOTPCommand",
+            "printedName": "CreteHttpPostBody_InvalidateOTPCommand(oneTimePassword:otpKey:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C38CreteHttpPostBody_InvalidateOTPCommand15oneTimePassword6otpKeyySS_SStYaFZ",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C38CreteHttpPostBody_InvalidateOTPCommand15oneTimePassword6otpKeyySS_SStYaFZ",
+            "moduleName": "iREdLockAndSensorFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "decodBleLockData",
+            "printedName": "decodBleLockData(deviceAddress:encrypted:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C08decodBleB4Data13deviceAddress9encryptedySSSg_10Foundation0H0VtFZ",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C08decodBleB4Data13deviceAddress9encryptedySSSg_10Foundation0H0VtFZ",
+            "moduleName": "iREdLockAndSensorFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "LockCardType",
+            "printedName": "LockCardType",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "ic",
+                "printedName": "ic",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdLockAndSensorFramework.LockAndSensor.LockCardType.Type) -> iREdLockAndSensorFramework.LockAndSensor.LockCardType",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "LockCardType",
+                        "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockCardType",
+                        "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8CardTypeO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockCardType.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockCardType",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockCardType",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8CardTypeO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8CardTypeO2icyA2EmF",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0B8CardTypeO2icyA2EmF",
+                "moduleName": "iREdLockAndSensorFramework"
+              },
+              {
+                "kind": "Var",
+                "name": "id",
+                "printedName": "id",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdLockAndSensorFramework.LockAndSensor.LockCardType.Type) -> iREdLockAndSensorFramework.LockAndSensor.LockCardType",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "LockCardType",
+                        "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockCardType",
+                        "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8CardTypeO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockCardType.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockCardType",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockCardType",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8CardTypeO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8CardTypeO2idyA2EmF",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0B8CardTypeO2idyA2EmF",
+                "moduleName": "iREdLockAndSensorFramework"
+              },
+              {
+                "kind": "Function",
+                "name": "==",
+                "printedName": "==(_:_:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "LockCardType",
+                    "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockCardType",
+                    "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8CardTypeO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "LockCardType",
+                    "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockCardType",
+                    "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8CardTypeO"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8CardTypeO2eeoiySbAE_AEtFZ",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0B8CardTypeO2eeoiySbAE_AEtFZ",
+                "moduleName": "iREdLockAndSensorFramework",
+                "static": true,
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Var",
+                "name": "hashValue",
+                "printedName": "hashValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8CardTypeO9hashValueSivp",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0B8CardTypeO9hashValueSivp",
+                "moduleName": "iREdLockAndSensorFramework",
+                "implicit": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8CardTypeO9hashValueSivg",
+                    "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0B8CardTypeO9hashValueSivg",
+                    "moduleName": "iREdLockAndSensorFramework",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  }
+                ]
+              },
+              {
+                "kind": "Function",
+                "name": "hash",
+                "printedName": "hash(into:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Hasher",
+                    "printedName": "Swift.Hasher",
+                    "paramValueOwnership": "InOut",
+                    "usr": "s:s6HasherV"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8CardTypeO4hash4intoys6HasherVz_tF",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0B8CardTypeO4hash4intoys6HasherVz_tF",
+                "moduleName": "iREdLockAndSensorFramework",
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              }
+            ],
+            "declKind": "Enum",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8CardTypeO",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0B8CardTypeO",
+            "moduleName": "iREdLockAndSensorFramework",
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Equatable",
+                "printedName": "Equatable",
+                "usr": "s:SQ",
+                "mangledName": "$sSQ"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Hashable",
+                "printedName": "Hashable",
+                "usr": "s:SH",
+                "mangledName": "$sSH"
+              }
+            ]
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "LockResponse",
+            "printedName": "LockResponse",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "register",
+                "printedName": "register",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type) -> (Swift.String, Swift.String?, Swift.Bool) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Swift.String?, Swift.Bool) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(qrCodeString: Swift.String, deviceAddress: Swift.String?, isSuccess: Swift.Bool)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Optional",
+                                "printedName": "Swift.String?",
+                                "children": [
+                                  {
+                                    "kind": "TypeNominal",
+                                    "name": "String",
+                                    "printedName": "Swift.String",
+                                    "usr": "s:SS"
+                                  }
+                                ],
+                                "usr": "s:Sq"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Bool",
+                                "printedName": "Swift.Bool",
+                                "usr": "s:Sb"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO8registeryAESS_SSSgSbtcAEmF",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0B8ResponseO8registeryAESS_SSSgSbtcAEmF",
+                "moduleName": "iREdLockAndSensorFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "tokenRecievedEvent",
+                "printedName": "tokenRecievedEvent",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type) -> (Swift.String, Foundation.Data, Swift.Int) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Foundation.Data, Swift.Int) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(deviceAddress: Swift.String, token: Foundation.Data, batteryPercentage: Swift.Int)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Data",
+                                "printedName": "Foundation.Data",
+                                "usr": "s:10Foundation4DataV"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Int",
+                                "printedName": "Swift.Int",
+                                "usr": "s:Si"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO18tokenRecievedEventyAESS_10Foundation4DataVSitcAEmF",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0B8ResponseO18tokenRecievedEventyAESS_10Foundation4DataVSitcAEmF",
+                "moduleName": "iREdLockAndSensorFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "unlockResponseEvent",
+                "printedName": "unlockResponseEvent",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type) -> (Swift.String, Swift.Bool) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Swift.Bool) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(deviceAddress: Swift.String, isLocked: Swift.Bool)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Bool",
+                                "printedName": "Swift.Bool",
+                                "usr": "s:Sb"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO06unlockF5EventyAESS_SbtcAEmF",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0B8ResponseO06unlockF5EventyAESS_SbtcAEmF",
+                "moduleName": "iREdLockAndSensorFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "queryLockStatus",
+                "printedName": "queryLockStatus",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type) -> (Swift.String, Swift.Bool) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Swift.Bool) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(deviceAddress: Swift.String, isLocked: Swift.Bool)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Bool",
+                                "printedName": "Swift.Bool",
+                                "usr": "s:Sb"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO05queryB6StatusyAESS_SbtcAEmF",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0B8ResponseO05queryB6StatusyAESS_SbtcAEmF",
+                "moduleName": "iREdLockAndSensorFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "addCardEvent",
+                "printedName": "addCardEvent",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type) -> (Swift.String, Swift.Bool, iREdLockAndSensorFramework.LockAndSensor.LockCardType?) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Swift.Bool, iREdLockAndSensorFramework.LockAndSensor.LockCardType?) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(deviceAddress: Swift.String, isSuccess: Swift.Bool, cardType: iREdLockAndSensorFramework.LockAndSensor.LockCardType?)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Bool",
+                                "printedName": "Swift.Bool",
+                                "usr": "s:Sb"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Optional",
+                                "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockCardType?",
+                                "children": [
+                                  {
+                                    "kind": "TypeNominal",
+                                    "name": "LockCardType",
+                                    "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockCardType",
+                                    "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8CardTypeO"
+                                  }
+                                ],
+                                "usr": "s:Sq"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO12addCardEventyAESS_SbAC0bH4TypeOSgtcAEmF",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0B8ResponseO12addCardEventyAESS_SbAC0bH4TypeOSgtcAEmF",
+                "moduleName": "iREdLockAndSensorFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "deleteAllCardEvent",
+                "printedName": "deleteAllCardEvent",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type) -> (Swift.String, Swift.Bool) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Swift.Bool) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(deviceAddress: Swift.String, isSuccess: Swift.Bool)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Bool",
+                                "printedName": "Swift.Bool",
+                                "usr": "s:Sb"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO18deleteAllCardEventyAESS_SbtcAEmF",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0B8ResponseO18deleteAllCardEventyAESS_SbtcAEmF",
+                "moduleName": "iREdLockAndSensorFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "queryCardCountEvent",
+                "printedName": "queryCardCountEvent",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type) -> (Swift.String, Swift.Int, Swift.Int) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Swift.Int, Swift.Int) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(deviceAddress: Swift.String, icCardCount: Swift.Int, idCardCount: Swift.Int)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Int",
+                                "printedName": "Swift.Int",
+                                "usr": "s:Si"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Int",
+                                "printedName": "Swift.Int",
+                                "usr": "s:Si"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO19queryCardCountEventyAESS_S2itcAEmF",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0B8ResponseO19queryCardCountEventyAESS_S2itcAEmF",
+                "moduleName": "iREdLockAndSensorFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "otpReceivedEvent",
+                "printedName": "otpReceivedEvent",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type) -> (Swift.String, Swift.Int) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Swift.Int) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(otp: Swift.String, expiredTime: Swift.Int)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Int",
+                                "printedName": "Swift.Int",
+                                "usr": "s:Si"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO16otpReceivedEventyAESS_SitcAEmF",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0B8ResponseO16otpReceivedEventyAESS_SitcAEmF",
+                "moduleName": "iREdLockAndSensorFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "otpInvalidateOTPEvent",
+                "printedName": "otpInvalidateOTPEvent",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type) -> (Swift.String, Swift.Bool) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Swift.Bool) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(otp: Swift.String, isSuccess: Swift.Bool)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Bool",
+                                "printedName": "Swift.Bool",
+                                "usr": "s:Sb"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO21otpInvalidateOTPEventyAESS_SbtcAEmF",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0B8ResponseO21otpInvalidateOTPEventyAESS_SbtcAEmF",
+                "moduleName": "iREdLockAndSensorFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "otpLockStatusEvent",
+                "printedName": "otpLockStatusEvent",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type) -> (Swift.String, Swift.Bool) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Swift.Bool) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(otp: Swift.String, isLocked: Swift.Bool)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Bool",
+                                "printedName": "Swift.Bool",
+                                "usr": "s:Sb"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO03otpB11StatusEventyAESS_SbtcAEmF",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0B8ResponseO03otpB11StatusEventyAESS_SbtcAEmF",
+                "moduleName": "iREdLockAndSensorFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "macAddressAndTokenCommandEvent",
+                "printedName": "macAddressAndTokenCommandEvent",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type) -> (Swift.String, Swift.String?, Foundation.Data?) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Swift.String?, Foundation.Data?) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(otp: Swift.String, deviceAddress: Swift.String?, requestTokenCommand: Foundation.Data?)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Optional",
+                                "printedName": "Swift.String?",
+                                "children": [
+                                  {
+                                    "kind": "TypeNominal",
+                                    "name": "String",
+                                    "printedName": "Swift.String",
+                                    "usr": "s:SS"
+                                  }
+                                ],
+                                "usr": "s:Sq"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Optional",
+                                "printedName": "Foundation.Data?",
+                                "children": [
+                                  {
+                                    "kind": "TypeNominal",
+                                    "name": "Data",
+                                    "printedName": "Foundation.Data",
+                                    "usr": "s:10Foundation4DataV"
+                                  }
+                                ],
+                                "usr": "s:Sq"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO010macAddressC17TokenCommandEventyAESS_SSSg10Foundation4DataVSgtcAEmF",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0B8ResponseO010macAddressC17TokenCommandEventyAESS_SSSg10Foundation4DataVSgtcAEmF",
+                "moduleName": "iREdLockAndSensorFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "lockDataAndUnlockCommand",
+                "printedName": "lockDataAndUnlockCommand",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type) -> (Swift.String, Foundation.Data?, Swift.Int?) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Foundation.Data?, Swift.Int?) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(otp: Swift.String, unlockCommand: Foundation.Data?, batteryPercent: Swift.Int?)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Optional",
+                                "printedName": "Foundation.Data?",
+                                "children": [
+                                  {
+                                    "kind": "TypeNominal",
+                                    "name": "Data",
+                                    "printedName": "Foundation.Data",
+                                    "usr": "s:10Foundation4DataV"
+                                  }
+                                ],
+                                "usr": "s:Sq"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Optional",
+                                "printedName": "Swift.Int?",
+                                "children": [
+                                  {
+                                    "kind": "TypeNominal",
+                                    "name": "Int",
+                                    "printedName": "Swift.Int",
+                                    "usr": "s:Si"
+                                  }
+                                ],
+                                "usr": "s:Sq"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO08lockDataC13UnlockCommandyAESS_10Foundation0H0VSgSiSgtcAEmF",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0B8ResponseO08lockDataC13UnlockCommandyAESS_10Foundation0H0VSgSiSgtcAEmF",
+                "moduleName": "iREdLockAndSensorFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "unknown",
+                "printedName": "unknown",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type) -> (Foundation.Data) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Foundation.Data) -> iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(raw: Foundation.Data)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Data",
+                                "printedName": "Foundation.Data",
+                                "usr": "s:10Foundation4DataV"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.LockResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO7unknownyAE10Foundation4DataV_tcAEmF",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0B8ResponseO7unknownyAE10Foundation4DataV_tcAEmF",
+                "moduleName": "iREdLockAndSensorFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              }
+            ],
+            "declKind": "Enum",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C0B8ResponseO",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0B8ResponseO",
+            "moduleName": "iREdLockAndSensorFramework",
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "setSensorCredentials",
+            "printedName": "setSensorCredentials(fromQRCode:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C03setD11Credentials10fromQRCodeySS_tFZ",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C03setD11Credentials10fromQRCodeySS_tFZ",
+            "moduleName": "iREdLockAndSensorFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "handleSensorBroadcast",
+            "printedName": "handleSensorBroadcast(peripheral:manufacturerData:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C06handleD9Broadcast10peripheral16manufacturerDataySo12CBPeripheralC_10Foundation0J0VtFZ",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C06handleD9Broadcast10peripheral16manufacturerDataySo12CBPeripheralC_10Foundation0J0VtFZ",
+            "moduleName": "iREdLockAndSensorFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "isSensor",
+            "printedName": "isSensor(peripheral:manufacturerData:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C02isD010peripheral16manufacturerDataSbSo12CBPeripheralC_10Foundation0I0VtFZ",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C02isD010peripheral16manufacturerDataSbSo12CBPeripheralC_10Foundation0I0VtFZ",
+            "moduleName": "iREdLockAndSensorFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getSensorMAC",
+            "printedName": "getSensorMAC(manufacturerData:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C03getD3MAC16manufacturerDataSSSg10Foundation0I0V_tFZ",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C03getD3MAC16manufacturerDataSSSg10Foundation0I0V_tFZ",
+            "moduleName": "iREdLockAndSensorFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "SensorResponse",
+            "printedName": "SensorResponse",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "register",
+                "printedName": "register",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdLockAndSensorFramework.LockAndSensor.SensorResponse.Type) -> (Swift.String, Swift.Bool) -> iREdLockAndSensorFramework.LockAndSensor.SensorResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Swift.Bool) -> iREdLockAndSensorFramework.LockAndSensor.SensorResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "SensorResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.SensorResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0D8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(qrCodeString: Swift.String, isSuccess: Swift.Bool)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Bool",
+                                "printedName": "Swift.Bool",
+                                "usr": "s:Sb"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdLockAndSensorFramework.LockAndSensor.SensorResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "SensorResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.SensorResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0D8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0D8ResponseO8registeryAESS_SbtcAEmF",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0D8ResponseO8registeryAESS_SbtcAEmF",
+                "moduleName": "iREdLockAndSensorFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "batteryLevelEvent",
+                "printedName": "batteryLevelEvent",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdLockAndSensorFramework.LockAndSensor.SensorResponse.Type) -> (Swift.String, Swift.Int) -> iREdLockAndSensorFramework.LockAndSensor.SensorResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Swift.Int) -> iREdLockAndSensorFramework.LockAndSensor.SensorResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "SensorResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.SensorResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0D8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(deviceAddress: Swift.String, batteryPercentage: Swift.Int)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Int",
+                                "printedName": "Swift.Int",
+                                "usr": "s:Si"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdLockAndSensorFramework.LockAndSensor.SensorResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "SensorResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.SensorResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0D8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0D8ResponseO17batteryLevelEventyAESS_SitcAEmF",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0D8ResponseO17batteryLevelEventyAESS_SitcAEmF",
+                "moduleName": "iREdLockAndSensorFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "doorStatusEvent",
+                "printedName": "doorStatusEvent",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdLockAndSensorFramework.LockAndSensor.SensorResponse.Type) -> (Swift.String, Swift.Bool, Swift.Bool) -> iREdLockAndSensorFramework.LockAndSensor.SensorResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Swift.Bool, Swift.Bool) -> iREdLockAndSensorFramework.LockAndSensor.SensorResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "SensorResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.SensorResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0D8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(deviceAddress: Swift.String, isDoorOpen: Swift.Bool, isDisassembled: Swift.Bool)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Bool",
+                                "printedName": "Swift.Bool",
+                                "usr": "s:Sb"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Bool",
+                                "printedName": "Swift.Bool",
+                                "usr": "s:Sb"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdLockAndSensorFramework.LockAndSensor.SensorResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "SensorResponse",
+                            "printedName": "iREdLockAndSensorFramework.LockAndSensor.SensorResponse",
+                            "usr": "s:26iREdLockAndSensorFramework0bcD0C0D8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0D8ResponseO15doorStatusEventyAESS_S2btcAEmF",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0D8ResponseO15doorStatusEventyAESS_S2btcAEmF",
+                "moduleName": "iREdLockAndSensorFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Function",
+                "name": "==",
+                "printedName": "==(_:_:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SensorResponse",
+                    "printedName": "iREdLockAndSensorFramework.LockAndSensor.SensorResponse",
+                    "usr": "s:26iREdLockAndSensorFramework0bcD0C0D8ResponseO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SensorResponse",
+                    "printedName": "iREdLockAndSensorFramework.LockAndSensor.SensorResponse",
+                    "usr": "s:26iREdLockAndSensorFramework0bcD0C0D8ResponseO"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:26iREdLockAndSensorFramework0bcD0C0D8ResponseO2eeoiySbAE_AEtFZ",
+                "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0D8ResponseO2eeoiySbAE_AEtFZ",
+                "moduleName": "iREdLockAndSensorFramework",
+                "static": true,
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              }
+            ],
+            "declKind": "Enum",
+            "usr": "s:26iREdLockAndSensorFramework0bcD0C0D8ResponseO",
+            "mangledName": "$s26iREdLockAndSensorFramework0bcD0C0D8ResponseO",
+            "moduleName": "iREdLockAndSensorFramework",
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Equatable",
+                "printedName": "Equatable",
+                "usr": "s:SQ",
+                "mangledName": "$sSQ"
+              }
+            ]
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:26iREdLockAndSensorFramework0bcD0C",
+        "mangledName": "$s26iREdLockAndSensorFramework0bcD0C",
+        "moduleName": "iREdLockAndSensorFramework",
+        "declAttributes": [
+          "AccessControl",
+          "Custom"
+        ],
+        "hasMissingDesignatedInitializers": true,
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/chapman\/Documents\/xcode_project\/iREd\/Framework(raw with demo)\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework.swift",
+      "kind": "Dictionary",
+      "offset": 287,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/chapman\/Documents\/xcode_project\/iREd\/Framework(raw with demo)\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework.swift",
+      "kind": "StringLiteral",
+      "offset": 325,
+      "length": 63,
+      "value": "\"https:\/\/prqwurhd90.execute-api.ap-east-1.amazonaws.com\/v1\/otp\""
+    },
+    {
+      "filePath": "\/Users\/chapman\/Documents\/xcode_project\/iREd\/Framework(raw with demo)\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework.swift",
+      "kind": "Array",
+      "offset": 449,
+      "length": 12,
+      "value": "[0x03, 0x00]"
+    },
+    {
+      "filePath": "\/Users\/chapman\/Documents\/xcode_project\/iREd\/Framework(raw with demo)\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework.swift",
+      "kind": "Array",
+      "offset": 516,
+      "length": 12,
+      "value": "[0x20, 0x00]"
+    },
+    {
+      "filePath": "\/Users\/chapman\/Documents\/xcode_project\/iREd\/Framework(raw with demo)\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework.swift",
+      "kind": "Array",
+      "offset": 581,
+      "length": 12,
+      "value": "[0x20, 0x01]"
+    },
+    {
+      "filePath": "\/Users\/chapman\/Documents\/xcode_project\/iREd\/Framework(raw with demo)\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework.swift",
+      "kind": "Array",
+      "offset": 649,
+      "length": 12,
+      "value": "[0x20, 0x03]"
+    },
+    {
+      "filePath": "\/Users\/chapman\/Documents\/xcode_project\/iREd\/Framework(raw with demo)\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework.swift",
+      "kind": "Array",
+      "offset": 715,
+      "length": 12,
+      "value": "[0x80, 0x06]"
+    },
+    {
+      "filePath": "\/Users\/chapman\/Documents\/xcode_project\/iREd\/Framework(raw with demo)\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework.swift",
+      "kind": "Array",
+      "offset": 778,
+      "length": 12,
+      "value": "[0x80, 0x00]"
+    },
+    {
+      "filePath": "\/Users\/chapman\/Documents\/xcode_project\/iREd\/Framework(raw with demo)\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework.swift",
+      "kind": "Array",
+      "offset": 846,
+      "length": 12,
+      "value": "[0x80, 0x08]"
+    },
+    {
+      "filePath": "\/Users\/chapman\/Documents\/xcode_project\/iREd\/Framework(raw with demo)\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework.swift",
+      "kind": "Array",
+      "offset": 907,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/chapman\/Documents\/xcode_project\/iREd\/Framework(raw with demo)\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework.swift",
+      "kind": "Array",
+      "offset": 957,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/chapman\/Documents\/xcode_project\/iREd\/Framework(raw with demo)\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework.swift",
+      "kind": "IntegerLiteral",
+      "offset": 19569,
+      "length": 2,
+      "value": "64"
+    },
+    {
+      "filePath": "\/Users\/chapman\/Documents\/xcode_project\/iREd\/Framework(raw with demo)\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework.swift",
+      "kind": "Array",
+      "offset": 29589,
+      "length": 203,
+      "value": "[\"D0:03:01:0A:09:41\", \"F0:03:31:01:01:4C\", \"D0:03:01:08:39:C2\", \"D0:03:01:0A:6A:74\", \"D0:03:01:04:38:28\"]"
+    },
+    {
+      "filePath": "\/Users\/chapman\/Documents\/xcode_project\/iREd\/Framework(raw with demo)\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework.swift",
+      "kind": "Array",
+      "offset": 29881,
+      "length": 102,
+      "value": "[\"C3:00:00:44:82:00\", \"C3:00:00:44:82:01\", \"C3:00:00:44:82:02\"]"
+    },
+    {
+      "filePath": "\/Users\/chapman\/Documents\/xcode_project\/iREd\/Framework(raw with demo)\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework.swift",
+      "kind": "IntegerLiteral",
+      "offset": 42211,
+      "length": 4,
+      "value": "0x00"
+    },
+    {
+      "filePath": "\/Users\/chapman\/Documents\/xcode_project\/iREd\/Framework(raw with demo)\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework\/iREdLockAndSensorFramework.swift",
+      "kind": "IntegerLiteral",
+      "offset": 42573,
+      "length": 4,
+      "value": "0x00"
+    }
+  ]
+}
