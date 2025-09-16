@@ -37,6 +37,34 @@ public struct Lock {
     public var unlockCommand: Data? = nil
     public var cardOpMessage: String? = nil
     
+    public var isQueryingStatus: Bool = false
+    
+    public var updatedAt: Date = Date()
+    
+    public var peripheralUUID: UUID? {
+        peripheral?.identifier
+    }
+}
+
+public struct OTPLock {
+    public let id: UUID = UUID()
+    public var otpString: String
+    public var isRegisterSuccess: Bool = false
+    public var isPairing: Bool = false
+    public var deviceAddress: String?
+    public var peripheral: CBPeripheral?
+    public var writeCh: CBCharacteristic?
+    public var notifyCh: CBCharacteristic?
+    public var pairStatus: PairStatus = .notPair
+    public var connectStatus: ConnectStatus = .disconnected
+    
+    public var tempToken: Data? = nil
+    public var batteryPercentage: Int?
+    public var lockStatus: LockStatus?
+    
+    public var requestTokenCommand: Data? = nil
+    public var unlockCommand: Data? = nil
+    
     public var expiredTime: Int?
     public var isExpired: Bool = false
     
@@ -51,20 +79,11 @@ public struct Lock {
         peripheral?.identifier
     }
 }
-// 使用 qrCodeString 作为 OTP 存储，提供便捷访问器
-public typealias OTPLock = Lock
-extension OTPLock {
-    public var otpString: String {
-        get { qrCodeString }
-        set { qrCodeString = newValue }
-    }
-}
+
 public struct Status {
     public var ble_isOpenedBluetooth: Bool = false
     public var ble_isScanning: Bool = false
-    public var ble_isConnecting: Bool = false
     
-    public var lock_isQueryingStatus: Bool = false
     public var otp_generating: Bool = false
 }
 

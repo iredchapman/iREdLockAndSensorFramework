@@ -9,7 +9,7 @@ public final class iREdLockAndSensorBluetooth: NSObject, ObservableObject {
     
     @Published public private(set) var sensorData: [Sensor] = []
     @Published public private(set) var lockData: [Lock] = []
-    @Published public private(set) var otpLockData: [Lock] = []
+    @Published public private(set) var otpLockData: [OTPLock] = []
     
     private var currentScanning_Lock_QRCodeString: String? = nil
     private var currentScanning_OTPLock_otpString: String? = nil
@@ -148,7 +148,9 @@ public final class iREdLockAndSensorBluetooth: NSObject, ObservableObject {
             let cmd = try LockAndSensor.BLE_LockStatusCommand(deviceAddress: deviceAddress, tempToken: t)
             self.write(to: .localLock(qrCodeString: qrCodeString), data: cmd)
             // "查询状态…"
-            state.lock_isQueryingStatus = true
+            updateLock(qrCode: qrCodeString) { l in
+                l.isQueryingStatus = true
+            }
         } catch {
             // "查询失败：\(error)"
         }
@@ -232,25 +234,30 @@ public final class iREdLockAndSensorBluetooth: NSObject, ObservableObject {
     }
     
     // MARK: Sensor
-    public func registerSensor(qrString: String) {
-        LockAndSensor.setSensorCredentials(fromQRCode: qrString)
+    public func registerSensor(qrCodeString: String) {
+        LockAndSensor.setSensorCredentials(fromQRCode: qrCodeString)
     }
     
     // MARK: - 私有工具
     private func write(to device: DeviceType, data: Data) {
-        let lock: Lock?
+        var lock: Lock? = nil
+        var otpLock: OTPLock? = nil
         
         switch device {
         case .localLock(let qrCodeString):
             lock = self.getLock(forQRCode: qrCodeString)
         case .otpLock(let otp):
-            lock = self.getOtpLock(forOTP: otp)
+            otpLock = self.getOtpLock(forOTP: otp)
         case .sensor:
             return
         }
         
-        guard let l = lock, let p = l.peripheral, let ch = l.writeCh else { return }
-        p.writeValue(data, for: ch, type: .withResponse)
+        if let l = lock, let p = l.peripheral, let ch = l.writeCh {
+            p.writeValue(data, for: ch, type: .withResponse)
+        } else if let l = otpLock, let p = l.peripheral, let ch = l.writeCh {
+            p.writeValue(data, for: ch, type: .withResponse)
+        }
+        
     }
 }
 
@@ -333,14 +340,14 @@ extension iREdLockAndSensorBluetooth: @preconcurrency CBCentralManagerDelegate {
     }
     
     public func centralManager(_ central: CBCentralManager,
-                                    didFailToConnect peripheral: CBPeripheral, error: Error?) {
+                               didFailToConnect peripheral: CBPeripheral, error: Error?) {
         Task { @MainActor in
             // print("连接失败：\(error?.localizedDescription ?? "-")")
         }
     }
     
     public func centralManager(_ central: CBCentralManager,
-                                    didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+                               didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         Task { @MainActor in
             // print("已断开：\(peripheral.name ?? "-")")
             if let _ = getLock(forPeripheralUUID: peripheral.identifier) {
@@ -376,8 +383,8 @@ extension iREdLockAndSensorBluetooth: @preconcurrency CBPeripheralDelegate {
     }
     
     public func peripheral(_ peripheral: CBPeripheral,
-                                didDiscoverCharacteristicsFor service: CBService,
-                                error: Error?) {
+                           didDiscoverCharacteristicsFor service: CBService,
+                           error: Error?) {
         guard error == nil else { return }
         service.characteristics?.forEach { ch in
             if ch.properties.contains(.notify) {
@@ -413,8 +420,8 @@ extension iREdLockAndSensorBluetooth: @preconcurrency CBPeripheralDelegate {
     }
     
     public func peripheral(_ peripheral: CBPeripheral,
-                                didUpdateValueFor characteristic: CBCharacteristic,
-                                error: Error?) {
+                           didUpdateValueFor characteristic: CBCharacteristic,
+                           error: Error?) {
         guard error == nil, let data = characteristic.value else { return }
         Task { @MainActor in
             if let l = self.getLock(forPeripheralUUID: peripheral.identifier), let deviceAddress = l.deviceAddress {
@@ -532,17 +539,17 @@ extension iREdLockAndSensorBluetooth {
     
     // MARK: - OTP Lock
     /// 查（按 OTP）
-    public func getOtpLock(forOTP otp: String) -> Lock? {
+    public func getOtpLock(forOTP otp: String) -> OTPLock? {
         otpLockData.first { $0.otpString == otp }
     }
     
     /// 查（按 peripheralUUID）
-    public func getOtpLock(forPeripheralUUID uuid: UUID) -> Lock? {
+    public func getOtpLock(forPeripheralUUID uuid: UUID) -> OTPLock? {
         otpLockData.first { $0.peripheral?.identifier == uuid }
     }
     
     /// 改（按 MAC，就地更新部分字段）
-    private func updateOtpLock(deviceAddress: String, update: (inout Lock) -> Void) {
+    private func updateOtpLock(deviceAddress: String, update: (inout OTPLock) -> Void) {
         guard let n = normalize(deviceAddress),
               let idx = otpLockData.firstIndex(where: { normalize($0.deviceAddress) == n }) else { return }
         update(&otpLockData[idx])
@@ -551,7 +558,7 @@ extension iREdLockAndSensorBluetooth {
     }
     
     /// 改（按 OTP，就地更新部分字段）
-    private func updateOtpLock(otp: String, update: (inout Lock) -> Void) {
+    private func updateOtpLock(otp: String, update: (inout OTPLock) -> Void) {
         guard let idx = otpLockData.firstIndex(where: { $0.otpString == otp }) else { return }
         update(&otpLockData[idx])
         markOtpLockUpdated(idx)
@@ -559,7 +566,7 @@ extension iREdLockAndSensorBluetooth {
     }
     
     /// 改（按 peripheralUUID，就地更新部分字段）
-    private func updateOtpLock(peripheralUUID uuid: UUID, update: (inout Lock) -> Void) {
+    private func updateOtpLock(peripheralUUID uuid: UUID, update: (inout OTPLock) -> Void) {
         guard let idx = otpLockData.firstIndex(where: { $0.peripheral?.identifier == uuid }) else { return }
         update(&otpLockData[idx])
         markOtpLockUpdated(idx)
@@ -567,7 +574,7 @@ extension iREdLockAndSensorBluetooth {
     }
     
     /// 增（按 OTP，存在则替换，不存在则追加）
-    private func upsertOtpLock(_ lock: Lock) {
+    private func upsertOtpLock(_ lock: OTPLock) {
         if let idx = otpLockData.firstIndex(where: { $0.otpString == lock.otpString }) {
             otpLockData[idx] = lock
             markOtpLockUpdated(idx)
@@ -772,30 +779,30 @@ extension iREdLockAndSensorBluetooth: @preconcurrency LockAndSensor.LockAndSenso
         case .queryLockStatus(let deviceAddress, let isLocked):
             updateLock(deviceAddress: deviceAddress) { l in
                 l.lockStatus = isLocked ? .normalClose : .normallyOpen
+                l.isQueryingStatus = false
             }
-            state.lock_isQueryingStatus = false
             
             // MARK: - Card
         case .addCardEvent(let deviceAddress, let isSuccess, let cardType):
             updateLock(deviceAddress: deviceAddress) { l in
                 l.cardOpMessage = isSuccess
-                    ? "Card added successfully ✅ (\(cardType == .ic ? "IC Card" : "ID Card"))"
-                    : "Failed to add card ❌"
+                ? "Card added successfully ✅ (\(cardType == .ic ? "IC Card" : "ID Card"))"
+                : "Failed to add card ❌"
             }
-
+            
         case .deleteAllCardEvent(let deviceAddress, let isSuccess):
             updateLock(deviceAddress: deviceAddress) { l in
                 l.cardOpMessage = isSuccess
-                    ? "All cards deleted ✅"
-                    : "Failed to delete cards ❌"
+                ? "All cards deleted ✅"
+                : "Failed to delete cards ❌"
             }
-
+            
         case .queryCardCountEvent(let deviceAddress, let ic, let id):
             updateLock(deviceAddress: deviceAddress) { l in
                 l.icCardCount = ic
                 l.idCardCount = id
             }
-
+            
             updateLock(deviceAddress: deviceAddress) { l in
                 l.cardOpMessage = "Card count: IC=\(ic) | ID=\(id)"
             }
@@ -803,7 +810,7 @@ extension iREdLockAndSensorBluetooth: @preconcurrency LockAndSensor.LockAndSenso
             // MARK: - OTP（保持你现有的实现）
         case .otpReceivedEvent(let otp, let expiredTime):
             self.state.otp_generating = false
-            upsertOtpLock(Lock(qrCodeString: otp, expiredTime: expiredTime))
+            upsertOtpLock(OTPLock(otpString: otp, expiredTime: expiredTime))
             
         case .otpInvalidateOTPEvent(let otp, let isSuccess):
             updateOtpLock(otp: otp) { ol in
@@ -819,8 +826,8 @@ extension iREdLockAndSensorBluetooth: @preconcurrency LockAndSensor.LockAndSenso
         case .macAddressAndTokenCommandEvent(let otp, let deviceAddress, let requestTokenCommand):
             if let deviceAddress, let requestTokenCommand {
                 upsertOtpLock(
-                    Lock(
-                        qrCodeString: otp,
+                    OTPLock(
+                        otpString: otp,
                         deviceAddress: deviceAddress,
                         requestTokenCommand: requestTokenCommand,
                         requestingTempToken: false,
@@ -830,8 +837,8 @@ extension iREdLockAndSensorBluetooth: @preconcurrency LockAndSensor.LockAndSenso
             } else {
                 // 超时
                 upsertOtpLock(
-                    Lock(
-                        qrCodeString: otp,
+                    OTPLock(
+                        otpString: otp,
                         deviceAddress: deviceAddress,
                         requestTokenCommand: requestTokenCommand,
                         requestingTempToken: false,
