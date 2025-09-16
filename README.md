@@ -42,7 +42,7 @@ https://github.com/iredchapman/iREdLockAndSensorFramework.git
 ### **示例截圖**
 
 <p align="center">
-  <img src="https://github.com/iredchapman/iREdFramework/blob/main/images/add_permissions.png?raw=true" width="500" alt="添加藍牙權限範例">
+  <img src="https://github.com/iredchapman/iREdLockAndSensorFramework/blob/main/images/add_permissions.png?raw=true" width="500" alt="添加藍牙權限範例">
 </p>
 
 
