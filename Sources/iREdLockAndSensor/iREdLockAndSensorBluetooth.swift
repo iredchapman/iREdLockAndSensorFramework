@@ -828,26 +828,39 @@ extension iREdLockAndSensorBluetooth: @preconcurrency LockAndSensor.LockAndSenso
             
         case .macAddressAndTokenCommandEvent(let otp, let deviceAddress, let requestTokenCommand):
             if let deviceAddress, let requestTokenCommand {
-                upsertOtpLock(
-                    OTPLock(
-                        otpString: otp,
-                        deviceAddress: deviceAddress,
-                        requestTokenCommand: requestTokenCommand,
-                        requestingTempToken: false,
-                        requestTempTokenError: false
-                    )
-                )
+//                upsertOtpLock(
+//                    OTPLock(
+//                        otpString: otp,
+//                        deviceAddress: deviceAddress,
+//                        requestTokenCommand: requestTokenCommand,
+//                        requestingTempToken: false,
+//                        requestTempTokenError: false
+//                    )
+//                )
+                updateOtpLock(otp: otp) { ol in
+                    ol.deviceAddress = deviceAddress
+                    ol.requestTokenCommand = requestTokenCommand
+                    ol.requestingTempToken = false
+                    ol.requestTempTokenError = false
+                }
             } else {
                 // 超时
-                upsertOtpLock(
-                    OTPLock(
-                        otpString: otp,
-                        deviceAddress: deviceAddress,
-                        requestTokenCommand: requestTokenCommand,
-                        requestingTempToken: false,
-                        requestTempTokenError: true
-                    )
-                )
+//                upsertOtpLock(
+//                    OTPLock(
+//                        otpString: otp,
+//                        deviceAddress: deviceAddress,
+//                        requestTokenCommand: requestTokenCommand,
+//                        requestingTempToken: false,
+//                        requestTempTokenError: true
+//                    )
+//                )
+                updateOtpLock(otp: otp) { ol in
+                    ol.deviceAddress = deviceAddress
+                    ol.requestTokenCommand = requestTokenCommand
+                    ol.requestingTempToken = false
+                    ol.requestTempTokenError = true
+                }
+                
             }
             
             
