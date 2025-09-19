@@ -203,6 +203,9 @@ public final class iREdLockAndSensorBluetooth: NSObject, ObservableObject {
         }
     }
     
+    public func registerOTP(otp: String) {
+        upsertOtpLock(OTPLock(otpString: otp, expiredTime: nil))
+    }
     public func getMACAddressAndTokenCommand(otp: String) {
         updateOtpLock(otp: otp) { ol in
             ol.requestingTempToken = true
