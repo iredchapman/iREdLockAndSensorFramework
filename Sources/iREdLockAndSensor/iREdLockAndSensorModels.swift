@@ -14,7 +14,7 @@ public enum LockStatus {
     case normalClose
 }
 
-public struct Lock {
+public struct Lock: Equatable {
     public let id: UUID = UUID()
     public var qrCodeString: String
     public var isRegisterSuccess: Bool = false
@@ -46,7 +46,7 @@ public struct Lock {
     }
 }
 
-public struct OTPLock {
+public struct OTPLock: Equatable {
     public let id: UUID = UUID()
     public var otpString: String
     public var isRegisterSuccess: Bool = false

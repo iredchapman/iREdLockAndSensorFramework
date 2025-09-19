@@ -578,12 +578,15 @@ extension iREdLockAndSensorBluetooth {
         if let idx = otpLockData.firstIndex(where: { $0.otpString == lock.otpString }) {
             otpLockData[idx] = lock
             markOtpLockUpdated(idx)
+            print("123")
         } else {
             var new = lock
             new.updatedAt = Date()
             otpLockData.append(new)
+            print("123123")
         }
         otpLockData = otpLockData
+        print("123123123")
     }
     
     /// 删（按 OTP）
@@ -786,15 +789,15 @@ extension iREdLockAndSensorBluetooth: @preconcurrency LockAndSensor.LockAndSenso
         case .addCardEvent(let deviceAddress, let isSuccess, let cardType):
             updateLock(deviceAddress: deviceAddress) { l in
                 l.cardOpMessage = isSuccess
-                ? "Card added successfully ✅ (\(cardType == .ic ? "IC Card" : "ID Card"))"
-                : "Failed to add card ❌"
+                ? "Card added successfully (\(cardType == .ic ? "IC Card" : "ID Card"))"
+                : "Failed to add card"
             }
             
         case .deleteAllCardEvent(let deviceAddress, let isSuccess):
             updateLock(deviceAddress: deviceAddress) { l in
                 l.cardOpMessage = isSuccess
-                ? "All cards deleted ✅"
-                : "Failed to delete cards ❌"
+                ? "All cards deleted"
+                : "Failed to delete cards"
             }
             
         case .queryCardCountEvent(let deviceAddress, let ic, let id):
@@ -807,7 +810,7 @@ extension iREdLockAndSensorBluetooth: @preconcurrency LockAndSensor.LockAndSenso
                 l.cardOpMessage = "Card count: IC=\(ic) | ID=\(id)"
             }
             
-            // MARK: - OTP（保持你现有的实现）
+            // MARK: - OTP
         case .otpReceivedEvent(let otp, let expiredTime):
             self.state.otp_generating = false
             upsertOtpLock(OTPLock(otpString: otp, expiredTime: expiredTime))
