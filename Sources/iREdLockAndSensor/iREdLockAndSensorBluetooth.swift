@@ -581,15 +581,12 @@ extension iREdLockAndSensorBluetooth {
         if let idx = otpLockData.firstIndex(where: { $0.otpString == lock.otpString }) {
             otpLockData[idx] = lock
             markOtpLockUpdated(idx)
-            print("123")
         } else {
             var new = lock
             new.updatedAt = Date()
             otpLockData.append(new)
-            print("123123")
         }
         otpLockData = otpLockData
-        print("123123123")
     }
     
     /// 删（按 OTP）
