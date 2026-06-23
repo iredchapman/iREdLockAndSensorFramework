@@ -782,7 +782,7 @@ extension BLEManager {
         return Array(bd.locks)
     }
 
-    public func updateLock(deviceAddress: String, action: (inout iREdLockModel) -> Void) -> Bool {
+    private func updateLock(deviceAddress: String, action: (inout iREdLockModel) -> Void) -> Bool {
         return bd.updateLock(deviceAddress: deviceAddress, action: action)
     }
 
