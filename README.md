@@ -5,7 +5,7 @@ description: This skill provides instructions and code snippets for integrating 
 
 # Lock & Sensor Framework Integration Guide
 
-本指南提供了在 SwiftUI 视图中使用 `BLEManager` 与锁具、一次性密码 (OTP) 以及传感器进行交互的基础代码实现和高级管理方法。
+本指南提供了在 SwiftUI 視圖中使用 `BLEManager` 與鎖具、一次性密碼 (OTP) 以及傳感器進行互動的基礎代碼實現和高級管理方法。
 
 ## **權限設定（Info.plist / Capabilities）**
 
@@ -31,9 +31,9 @@ description: This skill provides instructions and code snippets for integrating 
 
 ------
 
-## Prerequisites (前提准备)
+## Prerequisites (前提準備)
 
-在需要使用这些能力的 View 中，请确保导入框架并实例化 `BLEManager` 的 `StateObject`：
+在需要使用這些能力的 View 中，請確保導入框架並實例化 `BLEManager` 的 `StateObject`：
 
 ```swift
 import iREdLockAndSensor
@@ -42,9 +42,9 @@ import iREdLockAndSensor
 
 ---
 
-## 1. Lock (智能锁管理)
+## 1. Lock (智能鎖管理)
 
-### 获取所有注册成功的锁具
+### 獲取所有註冊成功的鎖具
 
 ```swift
 List(ble.getLocks(), id: \.id) { lock in
@@ -52,9 +52,9 @@ List(ble.getLocks(), id: \.id) { lock in
 }
 ```
 
-### 单锁具基础用法
+### 單鎖具基礎用法
 
-#### 1.1 锁具状态展示
+#### 1.1 鎖具狀態展示
 
 ```swift
 VStack(alignment: .leading) {
@@ -69,67 +69,67 @@ VStack(alignment: .leading) {
 }
 ```
 
-#### 1.2 注册锁具
+#### 1.2 註冊鎖具
 
 ```swift
 @State var qrCodeString: String = ""
 @State var isRegisterSuccess: Bool = false
 
 VStack {
-    Text("Registration status：\(isRegisterSuccess ? "成功" : "失败")")
+    Text("Registration status：\(isRegisterSuccess ? "成功" : "失敗")")
     Button(action: {
         Task {
             isRegisterSuccess = await ble.register(for: qrCodeString)
         }
     }) {
-        Text("注册")
+        Text("註冊")
     }
 }
 ```
 
-#### 1.3 连接与断开蓝牙连接
+#### 1.3 連接與斷開藍牙連接
 
 ```swift
-// 连接锁具
+// 連接鎖具
 ble.connect(identifier: qrCodeString)
 
-// 断开锁具蓝牙连接
+// 斷開鎖具藍牙連接
 ble.disconnect(identifier: qrCodeString)
 ```
 
-#### 1.4 触发开锁
+#### 1.4 觸發開鎖
 
 ```swift
 ble.unlock(identifier: qrCodeString)
 ```
 
-### 锁具高级管理
+### 鎖具高級管理
 
-#### 2.1 查询锁具当前闭合状态
+#### 2.1 查詢鎖具當前閉合狀態
 
 ```swift
 ble.queryStatus(identifier: qrCodeString)
 ```
 
-#### 2.2 门禁卡管理
+#### 2.2 門禁卡管理
 
 ```swift
-// 添加门禁卡 (触发后，建议显示“请将识别卡片靠近锁具识别区域”的提示框)
+// 添加門禁卡 (觸發後，建議顯示「請將識別卡片靠近鎖具識別區域」的提示框)
 ble.addCard(identifier: qrCodeString) 
 
-// 查询门禁卡数量
+// 查詢門禁卡數量
 ble.queryCardCount(identifier: qrCodeString)
 
-// 删除所有门禁卡
+// 刪除所有門禁卡
 ble.deleteAllCard(identifier: qrCodeString)
 ```
 
-#### 2.3 生成一次性密码（One Time Password）
+#### 2.3 生成一次性密碼（One Time Password）
 
 ```swift
 Button(action: {
     ble.setOtpKey(otpKey: "LEO_KEY")
-    // expiredTime 最大设定 30 天
+    // expiredTime 最大設定 30 天
     let sevenDayExp = Int(Date().addingTimeInterval(7 * 24 * 60 * 60).timeIntervalSince1970)
     Task {
         isGeneratingOTP = true
@@ -146,7 +146,7 @@ Button(action: {
 }
 ```
 
-#### 2.4 获取锁具的所有一次性密码记录
+#### 2.4 獲取鎖具的所有一次性密碼記錄
 
 ```swift
 VStack {
@@ -157,13 +157,13 @@ VStack {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("OTP: \(item.otp)")
-                    Text("过期时间: \(formatTimestamp(item.exp))")
+                    Text("過期時間: \(formatTimestamp(item.exp))")
                 }
                 Spacer()
                 Button(action: {
                     UIPasteboard.general.string = item.otp
                 }) {
-                    Text("复制")
+                    Text("複製")
                 }
             }
         }
@@ -173,23 +173,23 @@ VStack {
 
 ---
 
-## 2. One Time Password (OTP 专用锁管理)
+## 2. One Time Password (OTP 專用鎖管理)
 
-### OTP 基础用法
+### OTP 基礎用法
 
-#### 1.1 用户填写 OTP 密码
+#### 1.1 用戶填寫 OTP 密碼
 
 ```swift
 @State var inputOTP: String = ""
 
-TextField("请输入 OTP 密码", text: $inputOTP)
+TextField("請輸入 OTP 密碼", text: $inputOTP)
     .font(.system(.body, design: .monospaced))
     .padding()
     .background(Color(.systemGray6))
     .cornerRadius(10)
 ```
 
-#### 1.2 获取 OTP 锁具状态
+#### 1.2 獲取 OTP 鎖具狀態
 
 ```swift
 VStack(alignment: .leading) {
@@ -203,7 +203,7 @@ VStack(alignment: .leading) {
 }
 ```
 
-#### 1.3 注册 OTP 锁具
+#### 1.3 註冊 OTP 鎖具
 
 ```swift
 VStack(alignment: .leading) {
@@ -233,17 +233,17 @@ VStack(alignment: .leading) {
 }
 ```
 
-#### 1.4 连接与开锁
+#### 1.4 連接與開鎖
 
 ```swift
-// 连接锁具
+// 連接鎖具
 Button(action: {
      ble.connect(identifier: inputOTP)
 }) {
     Text("connect")
 }
 
-// 执行开锁
+// 執行開鎖
 Button(action: {
     ble.unlock(identifier: inputOTP)
 }) {
@@ -253,11 +253,11 @@ Button(action: {
 
 ---
 
-## 3. Sensor (门窗传感器管理)
+## 3. Sensor (門窗傳感器管理)
 
-### 单门窗传感器基础用法
+### 單門窗傳感器基礎用法
 
-#### 1.1 传感器状态展示
+#### 1.1 傳感器狀態展示
 
 ```swift
 VStack(alignment: .leading) {
@@ -269,20 +269,20 @@ VStack(alignment: .leading) {
 }
 ```
 
-#### 1.2 注册传感器
+#### 1.2 註冊傳感器
 
 ```swift
 @State var qrCodeString: String = ""
 @State var isRegisterSuccess: Bool = false
 
 VStack(alignment: .leading) {
-    Text("Registration status：\(isRegisterSuccess ? "成功" : "失败")")
+    Text("Registration status：\(isRegisterSuccess ? "成功" : "失敗")")
     Button(action: {
         Task {
             isRegisterSuccess = await ble.register(for: qrCodeString)
         }
     }) {
-        Text("注册")
+        Text("註冊")
             .font(.headline)
             .frame(maxWidth: .infinity)
             .padding()
@@ -292,13 +292,13 @@ VStack(alignment: .leading) {
 }
 ```
 
-#### 1.3 开始监听传感器数据
+#### 1.3 開始監聽傳感器數據
 
 ```swift
 Button(action: {
     ble.startListeningToSensor(qrCodeString: qrCodeString)
 }) {
-    Text("开始监听传感器")
+    Text("開始監聽傳感器")
         .font(.headline)
         .frame(maxWidth: .infinity)
         .padding()
@@ -306,4 +306,3 @@ Button(action: {
 .buttonStyle(.borderedProminent)
 .tint(.green)
 ```
-
