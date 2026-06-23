@@ -1,0 +1,2475 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "iREdSecureLinkFramework",
+    "printedName": "iREdSecureLinkFramework",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "iREdSecureLinkFramework"
+      },
+      {
+        "kind": "Import",
+        "name": "CoreBluetooth",
+        "printedName": "CoreBluetooth",
+        "declKind": "Import",
+        "moduleName": "iREdSecureLinkFramework"
+      },
+      {
+        "kind": "Import",
+        "name": "CommonCrypto",
+        "printedName": "CommonCrypto",
+        "declKind": "Import",
+        "moduleName": "iREdSecureLinkFramework"
+      },
+      {
+        "kind": "Import",
+        "name": "SwiftUI",
+        "printedName": "SwiftUI",
+        "declKind": "Import",
+        "moduleName": "iREdSecureLinkFramework"
+      },
+      {
+        "kind": "Import",
+        "name": "Combine",
+        "printedName": "Combine",
+        "declKind": "Import",
+        "moduleName": "iREdSecureLinkFramework"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "LockAndSensor",
+        "printedName": "LockAndSensor",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "LockAndSensor",
+                "printedName": "iREdSecureLinkFramework.LockAndSensor",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorCACycfc",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorCACycfc",
+            "moduleName": "iREdSecureLinkFramework",
+            "declAttributes": [
+              "Custom",
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "LockAndSensorFrameworkDelegate",
+            "printedName": "LockAndSensorFrameworkDelegate",
+            "children": [
+              {
+                "kind": "Function",
+                "name": "lockCallback",
+                "printedName": "lockCallback(didDecode:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "LockResponse",
+                    "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                    "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0efgD8DelegateP12lockCallback9didDecodeyAC0E8ResponseO_tF",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0efgD8DelegateP12lockCallback9didDecodeyAC0E8ResponseO_tF",
+                "moduleName": "iREdSecureLinkFramework",
+                "genericSig": "<τ_0_0 where τ_0_0 : iREdSecureLinkFramework.LockAndSensor.LockAndSensorFrameworkDelegate>",
+                "sugared_genericSig": "<Self where Self : iREdSecureLinkFramework.LockAndSensor.LockAndSensorFrameworkDelegate>",
+                "protocolReq": true,
+                "reqNewWitnessTableEntry": true,
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Function",
+                "name": "doorSensorCallback",
+                "printedName": "doorSensorCallback(deviceAddress:didDecodeSensor:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SensorResponse",
+                    "printedName": "iREdSecureLinkFramework.LockAndSensor.SensorResponse",
+                    "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0G8ResponseO"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0efgD8DelegateP04doorG8Callback13deviceAddress09didDecodeG0ySSSg_AC0G8ResponseOtF",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0efgD8DelegateP04doorG8Callback13deviceAddress09didDecodeG0ySSSg_AC0G8ResponseOtF",
+                "moduleName": "iREdSecureLinkFramework",
+                "genericSig": "<τ_0_0 where τ_0_0 : iREdSecureLinkFramework.LockAndSensor.LockAndSensorFrameworkDelegate>",
+                "sugared_genericSig": "<Self where Self : iREdSecureLinkFramework.LockAndSensor.LockAndSensorFrameworkDelegate>",
+                "protocolReq": true,
+                "reqNewWitnessTableEntry": true,
+                "funcSelfKind": "NonMutating"
+              }
+            ],
+            "declKind": "Protocol",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0efgD8DelegateP",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0efgD8DelegateP",
+            "moduleName": "iREdSecureLinkFramework",
+            "genericSig": "<τ_0_0 : AnyObject>",
+            "sugared_genericSig": "<Self : AnyObject>",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "delegate",
+            "printedName": "delegate",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "WeakStorage",
+                "printedName": "(any iREdSecureLinkFramework.LockAndSensor.LockAndSensorFrameworkDelegate)?"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC8delegateAC0efgD8Delegate_pSgvpZ",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC8delegateAC0efgD8Delegate_pSgvpZ",
+            "moduleName": "iREdSecureLinkFramework",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "Custom",
+              "HasStorage",
+              "ReferenceOwnership",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "ownership": 1,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "(any iREdSecureLinkFramework.LockAndSensor.LockAndSensorFrameworkDelegate)?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "LockAndSensorFrameworkDelegate",
+                        "printedName": "any iREdSecureLinkFramework.LockAndSensor.LockAndSensorFrameworkDelegate",
+                        "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0efgD8DelegateP"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC8delegateAC0efgD8Delegate_pSgvgZ",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC8delegateAC0efgD8Delegate_pSgvgZ",
+                "moduleName": "iREdSecureLinkFramework",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "(any iREdSecureLinkFramework.LockAndSensor.LockAndSensorFrameworkDelegate)?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "LockAndSensorFrameworkDelegate",
+                        "printedName": "any iREdSecureLinkFramework.LockAndSensor.LockAndSensorFrameworkDelegate",
+                        "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0efgD8DelegateP"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC8delegateAC0efgD8Delegate_pSgvsZ",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC8delegateAC0efgD8Delegate_pSgvsZ",
+                "moduleName": "iREdSecureLinkFramework",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC8delegateAC0efgD8Delegate_pSgvMZ",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC8delegateAC0efgD8Delegate_pSgvMZ",
+                "moduleName": "iREdSecureLinkFramework",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "setLockCredentials",
+            "printedName": "setLockCredentials(fromQRCode:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Tuple",
+                "printedName": "(qrCodeString: Swift.String, deviceAddress: Swift.String?, isSuccess: Swift.Bool)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC03setE11Credentials10fromQRCodeSS12qrCodeString_SSSg13deviceAddressSb9isSuccesstSS_tF",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC03setE11Credentials10fromQRCodeSS12qrCodeString_SSSg13deviceAddressSb9isSuccesstSS_tF",
+            "moduleName": "iREdSecureLinkFramework",
+            "declAttributes": [
+              "Custom"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getLocksCredentialsMACAddress",
+            "printedName": "getLocksCredentialsMACAddress()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[Swift.String]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC29getLocksCredentialsMACAddressSaySSGyFZ",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC29getLocksCredentialsMACAddressSaySSGyFZ",
+            "moduleName": "iREdSecureLinkFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getLockCredentialsMACAddress",
+            "printedName": "getLockCredentialsMACAddress(qrCodeString:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC03getE21CredentialsMACAddress12qrCodeStringSSSgSS_tFZ",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC03getE21CredentialsMACAddress12qrCodeStringSSSgSS_tFZ",
+            "moduleName": "iREdSecureLinkFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getLockMAC",
+            "printedName": "getLockMAC(manufacturerData:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC03getE3MAC16manufacturerDataSSSg10Foundation0K0V_tFZ",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC03getE3MAC16manufacturerDataSSSg10Foundation0K0V_tFZ",
+            "moduleName": "iREdSecureLinkFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "isLock",
+            "printedName": "isLock(peripheral:manufacturerData:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC02isE010peripheral16manufacturerDataSbSo12CBPeripheralC_10Foundation0K0VtFZ",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC02isE010peripheral16manufacturerDataSbSo12CBPeripheralC_10Foundation0K0VtFZ",
+            "moduleName": "iREdSecureLinkFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "BLE_RequestTokenCommand",
+            "printedName": "BLE_RequestTokenCommand(deviceAddress:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC23BLE_RequestTokenCommand13deviceAddress10Foundation4DataVSS_tKF",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC23BLE_RequestTokenCommand13deviceAddress10Foundation4DataVSS_tKF",
+            "moduleName": "iREdSecureLinkFramework",
+            "declAttributes": [
+              "Custom"
+            ],
+            "isFromExtension": true,
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "BLE_UnlockCommand",
+            "printedName": "BLE_UnlockCommand(deviceAddress:tempToken:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC17BLE_UnlockCommand13deviceAddress9tempToken10Foundation4DataVSS_AItKF",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC17BLE_UnlockCommand13deviceAddress9tempToken10Foundation4DataVSS_AItKF",
+            "moduleName": "iREdSecureLinkFramework",
+            "declAttributes": [
+              "Custom"
+            ],
+            "isFromExtension": true,
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "BLE_LockStatusCommand",
+            "printedName": "BLE_LockStatusCommand(deviceAddress:tempToken:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC04BLE_E13StatusCommand13deviceAddress9tempToken10Foundation4DataVSS_AItKF",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC04BLE_E13StatusCommand13deviceAddress9tempToken10Foundation4DataVSS_AItKF",
+            "moduleName": "iREdSecureLinkFramework",
+            "declAttributes": [
+              "Custom"
+            ],
+            "isFromExtension": true,
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "BLE_AddCardCommand",
+            "printedName": "BLE_AddCardCommand(deviceAddress:tempToken:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC18BLE_AddCardCommand13deviceAddress9tempToken10Foundation4DataVSS_AItKF",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC18BLE_AddCardCommand13deviceAddress9tempToken10Foundation4DataVSS_AItKF",
+            "moduleName": "iREdSecureLinkFramework",
+            "declAttributes": [
+              "Custom"
+            ],
+            "isFromExtension": true,
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "BLE_QueryCardCountCommand",
+            "printedName": "BLE_QueryCardCountCommand(deviceAddress:tempToken:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC25BLE_QueryCardCountCommand13deviceAddress9tempToken10Foundation4DataVSS_AItKF",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC25BLE_QueryCardCountCommand13deviceAddress9tempToken10Foundation4DataVSS_AItKF",
+            "moduleName": "iREdSecureLinkFramework",
+            "declAttributes": [
+              "Custom"
+            ],
+            "isFromExtension": true,
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "BLE_DeleteAllCardsCommand",
+            "printedName": "BLE_DeleteAllCardsCommand(deviceAddress:tempToken:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC25BLE_DeleteAllCardsCommand13deviceAddress9tempToken10Foundation4DataVSS_AItKF",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC25BLE_DeleteAllCardsCommand13deviceAddress9tempToken10Foundation4DataVSS_AItKF",
+            "moduleName": "iREdSecureLinkFramework",
+            "declAttributes": [
+              "Custom"
+            ],
+            "isFromExtension": true,
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "CreateHttpPostBody_GenerateOTP",
+            "printedName": "CreateHttpPostBody_GenerateOTP(credentials:expiredTime:otpKey:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Tuple",
+                "printedName": "(Swift.String?, Swift.Int?)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Int?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC30CreateHttpPostBody_GenerateOTP11credentials11expiredTime6otpKeySSSg_SiSgtSS_SiSStYaFZ",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC30CreateHttpPostBody_GenerateOTP11credentials11expiredTime6otpKeySSSg_SiSgtSS_SiSStYaFZ",
+            "moduleName": "iREdSecureLinkFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "CreateHttpPostBody_HandleBleResponseCommand",
+            "printedName": "CreateHttpPostBody_HandleBleResponseCommand(oneTimePassword:bleResponse:otpKey:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC43CreateHttpPostBody_HandleBleResponseCommand15oneTimePassword03bleN06otpKeyySS_10Foundation4DataVSStYaFZ",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC43CreateHttpPostBody_HandleBleResponseCommand15oneTimePassword03bleN06otpKeyySS_10Foundation4DataVSStYaFZ",
+            "moduleName": "iREdSecureLinkFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "CreateHttpPostBody_GetMACAddressAndTokenCommand",
+            "printedName": "CreateHttpPostBody_GetMACAddressAndTokenCommand(oneTimePassword:otpKey:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Tuple",
+                "printedName": "(Swift.String?, Foundation.Data?)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Foundation.Data?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Data",
+                        "printedName": "Foundation.Data",
+                        "usr": "s:10Foundation4DataV"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC032CreateHttpPostBody_GetMACAddressF12TokenCommand15oneTimePassword6otpKeySSSg_10Foundation4DataVSgtSS_SStYaFZ",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC032CreateHttpPostBody_GetMACAddressF12TokenCommand15oneTimePassword6otpKeySSSg_10Foundation4DataVSgtSS_SStYaFZ",
+            "moduleName": "iREdSecureLinkFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "CreateHttpPostBody_InvalidateOTPCommand",
+            "printedName": "CreateHttpPostBody_InvalidateOTPCommand(oneTimePassword:otpKey:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC39CreateHttpPostBody_InvalidateOTPCommand15oneTimePassword6otpKeyySS_SStYaFZ",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC39CreateHttpPostBody_InvalidateOTPCommand15oneTimePassword6otpKeyySS_SStYaFZ",
+            "moduleName": "iREdSecureLinkFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "decodBleLockData",
+            "printedName": "decodBleLockData(deviceAddress:encrypted:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC08decodBleE4Data13deviceAddress9encryptedySSSg_10Foundation0J0VtF",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC08decodBleE4Data13deviceAddress9encryptedySSSg_10Foundation0J0VtF",
+            "moduleName": "iREdSecureLinkFramework",
+            "declAttributes": [
+              "Custom"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "LockCardType",
+            "printedName": "LockCardType",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "ic",
+                "printedName": "ic",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdSecureLinkFramework.LockAndSensor.LockCardType.Type) -> iREdSecureLinkFramework.LockAndSensor.LockCardType",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "LockCardType",
+                        "printedName": "iREdSecureLinkFramework.LockAndSensor.LockCardType",
+                        "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8CardTypeO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdSecureLinkFramework.LockAndSensor.LockCardType.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockCardType",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.LockCardType",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8CardTypeO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8CardTypeO2icyA2EmF",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0E8CardTypeO2icyA2EmF",
+                "moduleName": "iREdSecureLinkFramework"
+              },
+              {
+                "kind": "Var",
+                "name": "id",
+                "printedName": "id",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdSecureLinkFramework.LockAndSensor.LockCardType.Type) -> iREdSecureLinkFramework.LockAndSensor.LockCardType",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "LockCardType",
+                        "printedName": "iREdSecureLinkFramework.LockAndSensor.LockCardType",
+                        "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8CardTypeO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdSecureLinkFramework.LockAndSensor.LockCardType.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockCardType",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.LockCardType",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8CardTypeO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8CardTypeO2idyA2EmF",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0E8CardTypeO2idyA2EmF",
+                "moduleName": "iREdSecureLinkFramework"
+              },
+              {
+                "kind": "Function",
+                "name": "==",
+                "printedName": "==(_:_:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "LockCardType",
+                    "printedName": "iREdSecureLinkFramework.LockAndSensor.LockCardType",
+                    "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8CardTypeO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "LockCardType",
+                    "printedName": "iREdSecureLinkFramework.LockAndSensor.LockCardType",
+                    "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8CardTypeO"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8CardTypeO2eeoiySbAE_AEtFZ",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0E8CardTypeO2eeoiySbAE_AEtFZ",
+                "moduleName": "iREdSecureLinkFramework",
+                "static": true,
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Var",
+                "name": "hashValue",
+                "printedName": "hashValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8CardTypeO9hashValueSivp",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0E8CardTypeO9hashValueSivp",
+                "moduleName": "iREdSecureLinkFramework",
+                "implicit": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8CardTypeO9hashValueSivg",
+                    "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0E8CardTypeO9hashValueSivg",
+                    "moduleName": "iREdSecureLinkFramework",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  }
+                ]
+              },
+              {
+                "kind": "Function",
+                "name": "hash",
+                "printedName": "hash(into:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Hasher",
+                    "printedName": "Swift.Hasher",
+                    "paramValueOwnership": "InOut",
+                    "usr": "s:s6HasherV"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8CardTypeO4hash4intoys6HasherVz_tF",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0E8CardTypeO4hash4intoys6HasherVz_tF",
+                "moduleName": "iREdSecureLinkFramework",
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              }
+            ],
+            "declKind": "Enum",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8CardTypeO",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0E8CardTypeO",
+            "moduleName": "iREdSecureLinkFramework",
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Equatable",
+                "printedName": "Equatable",
+                "usr": "s:SQ",
+                "mangledName": "$sSQ"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Hashable",
+                "printedName": "Hashable",
+                "usr": "s:SH",
+                "mangledName": "$sSH"
+              }
+            ]
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "LockResponse",
+            "printedName": "LockResponse",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "tokenRecievedEvent",
+                "printedName": "tokenRecievedEvent",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdSecureLinkFramework.LockAndSensor.LockResponse.Type) -> (Swift.String, Foundation.Data, Swift.Int) -> iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Foundation.Data, Swift.Int) -> iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(deviceAddress: Swift.String, token: Foundation.Data, batteryPercentage: Swift.Int)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Data",
+                                "printedName": "Foundation.Data",
+                                "usr": "s:10Foundation4DataV"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Int",
+                                "printedName": "Swift.Int",
+                                "usr": "s:Si"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO18tokenRecievedEventyAESS_10Foundation4DataVSitcAEmF",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO18tokenRecievedEventyAESS_10Foundation4DataVSitcAEmF",
+                "moduleName": "iREdSecureLinkFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "unlockResponseEvent",
+                "printedName": "unlockResponseEvent",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdSecureLinkFramework.LockAndSensor.LockResponse.Type) -> (Swift.String, Swift.Bool) -> iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Swift.Bool) -> iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(deviceAddress: Swift.String, isLocked: Swift.Bool)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Bool",
+                                "printedName": "Swift.Bool",
+                                "usr": "s:Sb"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO06unlockH5EventyAESS_SbtcAEmF",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO06unlockH5EventyAESS_SbtcAEmF",
+                "moduleName": "iREdSecureLinkFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "queryLockStatus",
+                "printedName": "queryLockStatus",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdSecureLinkFramework.LockAndSensor.LockResponse.Type) -> (Swift.String, Swift.Bool) -> iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Swift.Bool) -> iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(deviceAddress: Swift.String, isLocked: Swift.Bool)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Bool",
+                                "printedName": "Swift.Bool",
+                                "usr": "s:Sb"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO05queryE6StatusyAESS_SbtcAEmF",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO05queryE6StatusyAESS_SbtcAEmF",
+                "moduleName": "iREdSecureLinkFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "addCardEvent",
+                "printedName": "addCardEvent",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdSecureLinkFramework.LockAndSensor.LockResponse.Type) -> (Swift.String, Swift.Bool, iREdSecureLinkFramework.LockAndSensor.LockCardType?) -> iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Swift.Bool, iREdSecureLinkFramework.LockAndSensor.LockCardType?) -> iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(deviceAddress: Swift.String, isSuccess: Swift.Bool, cardType: iREdSecureLinkFramework.LockAndSensor.LockCardType?)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Bool",
+                                "printedName": "Swift.Bool",
+                                "usr": "s:Sb"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Optional",
+                                "printedName": "iREdSecureLinkFramework.LockAndSensor.LockCardType?",
+                                "children": [
+                                  {
+                                    "kind": "TypeNominal",
+                                    "name": "LockCardType",
+                                    "printedName": "iREdSecureLinkFramework.LockAndSensor.LockCardType",
+                                    "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8CardTypeO"
+                                  }
+                                ],
+                                "usr": "s:Sq"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO12addCardEventyAESS_SbAC0eJ4TypeOSgtcAEmF",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO12addCardEventyAESS_SbAC0eJ4TypeOSgtcAEmF",
+                "moduleName": "iREdSecureLinkFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "deleteAllCardEvent",
+                "printedName": "deleteAllCardEvent",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdSecureLinkFramework.LockAndSensor.LockResponse.Type) -> (Swift.String, Swift.Bool) -> iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Swift.Bool) -> iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(deviceAddress: Swift.String, isSuccess: Swift.Bool)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Bool",
+                                "printedName": "Swift.Bool",
+                                "usr": "s:Sb"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO18deleteAllCardEventyAESS_SbtcAEmF",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO18deleteAllCardEventyAESS_SbtcAEmF",
+                "moduleName": "iREdSecureLinkFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "queryCardCountEvent",
+                "printedName": "queryCardCountEvent",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdSecureLinkFramework.LockAndSensor.LockResponse.Type) -> (Swift.String, Swift.Int, Swift.Int) -> iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Swift.Int, Swift.Int) -> iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(deviceAddress: Swift.String, icCardCount: Swift.Int, idCardCount: Swift.Int)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Int",
+                                "printedName": "Swift.Int",
+                                "usr": "s:Si"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Int",
+                                "printedName": "Swift.Int",
+                                "usr": "s:Si"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO19queryCardCountEventyAESS_S2itcAEmF",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO19queryCardCountEventyAESS_S2itcAEmF",
+                "moduleName": "iREdSecureLinkFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "otpInvalidateOTPEvent",
+                "printedName": "otpInvalidateOTPEvent",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdSecureLinkFramework.LockAndSensor.LockResponse.Type) -> (Swift.String, Swift.Bool) -> iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Swift.Bool) -> iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(otp: Swift.String, isSuccess: Swift.Bool)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Bool",
+                                "printedName": "Swift.Bool",
+                                "usr": "s:Sb"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO21otpInvalidateOTPEventyAESS_SbtcAEmF",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO21otpInvalidateOTPEventyAESS_SbtcAEmF",
+                "moduleName": "iREdSecureLinkFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "otpLockStatusEvent",
+                "printedName": "otpLockStatusEvent",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdSecureLinkFramework.LockAndSensor.LockResponse.Type) -> (Swift.String, Swift.Bool) -> iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Swift.Bool) -> iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(otp: Swift.String, isLocked: Swift.Bool)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Bool",
+                                "printedName": "Swift.Bool",
+                                "usr": "s:Sb"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO03otpE11StatusEventyAESS_SbtcAEmF",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO03otpE11StatusEventyAESS_SbtcAEmF",
+                "moduleName": "iREdSecureLinkFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "lockDataAndUnlockCommand",
+                "printedName": "lockDataAndUnlockCommand",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdSecureLinkFramework.LockAndSensor.LockResponse.Type) -> (Swift.String, Foundation.Data?, Swift.Int?) -> iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Foundation.Data?, Swift.Int?) -> iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(otp: Swift.String, unlockCommand: Foundation.Data?, batteryPercent: Swift.Int?)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Optional",
+                                "printedName": "Foundation.Data?",
+                                "children": [
+                                  {
+                                    "kind": "TypeNominal",
+                                    "name": "Data",
+                                    "printedName": "Foundation.Data",
+                                    "usr": "s:10Foundation4DataV"
+                                  }
+                                ],
+                                "usr": "s:Sq"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Optional",
+                                "printedName": "Swift.Int?",
+                                "children": [
+                                  {
+                                    "kind": "TypeNominal",
+                                    "name": "Int",
+                                    "printedName": "Swift.Int",
+                                    "usr": "s:Si"
+                                  }
+                                ],
+                                "usr": "s:Sq"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO08lockDataF13UnlockCommandyAESS_10Foundation0J0VSgSiSgtcAEmF",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO08lockDataF13UnlockCommandyAESS_10Foundation0J0VSgSiSgtcAEmF",
+                "moduleName": "iREdSecureLinkFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "unknown",
+                "printedName": "unknown",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdSecureLinkFramework.LockAndSensor.LockResponse.Type) -> (Foundation.Data) -> iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Foundation.Data) -> iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(raw: Foundation.Data)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Data",
+                                "printedName": "Foundation.Data",
+                                "usr": "s:10Foundation4DataV"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LockResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.LockResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO7unknownyAE10Foundation4DataV_tcAEmF",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO7unknownyAE10Foundation4DataV_tcAEmF",
+                "moduleName": "iREdSecureLinkFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              }
+            ],
+            "declKind": "Enum",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0E8ResponseO",
+            "moduleName": "iREdSecureLinkFramework",
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "setSensorCredentials",
+            "printedName": "setSensorCredentials(fromQRCode:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Tuple",
+                "printedName": "(qrCodeString: Swift.String, deviceAddress: Swift.String?, isSuccess: Swift.Bool)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC03setG11Credentials10fromQRCodeSS12qrCodeString_SSSg13deviceAddressSb9isSuccesstSS_tF",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC03setG11Credentials10fromQRCodeSS12qrCodeString_SSSg13deviceAddressSb9isSuccesstSS_tF",
+            "moduleName": "iREdSecureLinkFramework",
+            "declAttributes": [
+              "Custom"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "handleSensorBroadcast",
+            "printedName": "handleSensorBroadcast(peripheral:manufacturerData:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC06handleG9Broadcast10peripheral16manufacturerDataySo12CBPeripheralC_10Foundation0L0VtFZ",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC06handleG9Broadcast10peripheral16manufacturerDataySo12CBPeripheralC_10Foundation0L0VtFZ",
+            "moduleName": "iREdSecureLinkFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "isSensor",
+            "printedName": "isSensor(peripheral:manufacturerData:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC02isG010peripheral16manufacturerDataSbSo12CBPeripheralC_10Foundation0K0VtFZ",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC02isG010peripheral16manufacturerDataSbSo12CBPeripheralC_10Foundation0K0VtFZ",
+            "moduleName": "iREdSecureLinkFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getSensorMAC",
+            "printedName": "getSensorMAC(manufacturerData:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC03getG3MAC16manufacturerDataSSSg10Foundation0K0V_tFZ",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC03getG3MAC16manufacturerDataSSSg10Foundation0K0V_tFZ",
+            "moduleName": "iREdSecureLinkFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "SensorResponse",
+            "printedName": "SensorResponse",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "batteryLevelEvent",
+                "printedName": "batteryLevelEvent",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdSecureLinkFramework.LockAndSensor.SensorResponse.Type) -> (Swift.String, Swift.Int) -> iREdSecureLinkFramework.LockAndSensor.SensorResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Swift.Int) -> iREdSecureLinkFramework.LockAndSensor.SensorResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "SensorResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.SensorResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0G8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(deviceAddress: Swift.String, batteryPercentage: Swift.Int)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Int",
+                                "printedName": "Swift.Int",
+                                "usr": "s:Si"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdSecureLinkFramework.LockAndSensor.SensorResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "SensorResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.SensorResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0G8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0G8ResponseO17batteryLevelEventyAESS_SitcAEmF",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0G8ResponseO17batteryLevelEventyAESS_SitcAEmF",
+                "moduleName": "iREdSecureLinkFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "doorStatusEvent",
+                "printedName": "doorStatusEvent",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(iREdSecureLinkFramework.LockAndSensor.SensorResponse.Type) -> (Swift.String, Swift.Bool, Swift.Bool) -> iREdSecureLinkFramework.LockAndSensor.SensorResponse",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.String, Swift.Bool, Swift.Bool) -> iREdSecureLinkFramework.LockAndSensor.SensorResponse",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "SensorResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.SensorResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0G8ResponseO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(deviceAddress: Swift.String, isDoorOpen: Swift.Bool, isDisassembled: Swift.Bool)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Bool",
+                                "printedName": "Swift.Bool",
+                                "usr": "s:Sb"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Bool",
+                                "printedName": "Swift.Bool",
+                                "usr": "s:Sb"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "iREdSecureLinkFramework.LockAndSensor.SensorResponse.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "SensorResponse",
+                            "printedName": "iREdSecureLinkFramework.LockAndSensor.SensorResponse",
+                            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0G8ResponseO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0G8ResponseO15doorStatusEventyAESS_S2btcAEmF",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0G8ResponseO15doorStatusEventyAESS_S2btcAEmF",
+                "moduleName": "iREdSecureLinkFramework",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Function",
+                "name": "==",
+                "printedName": "==(_:_:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SensorResponse",
+                    "printedName": "iREdSecureLinkFramework.LockAndSensor.SensorResponse",
+                    "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0G8ResponseO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SensorResponse",
+                    "printedName": "iREdSecureLinkFramework.LockAndSensor.SensorResponse",
+                    "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0G8ResponseO"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0G8ResponseO2eeoiySbAE_AEtFZ",
+                "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0G8ResponseO2eeoiySbAE_AEtFZ",
+                "moduleName": "iREdSecureLinkFramework",
+                "static": true,
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              }
+            ],
+            "declKind": "Enum",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC0G8ResponseO",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC0G8ResponseO",
+            "moduleName": "iREdSecureLinkFramework",
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Equatable",
+                "printedName": "Equatable",
+                "usr": "s:SQ",
+                "mangledName": "$sSQ"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "fetch_requestTokenCommand",
+            "printedName": "fetch_requestTokenCommand(otp:otpKey:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Tuple",
+                "printedName": "(Swift.String?, Foundation.Data?)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Foundation.Data?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Data",
+                        "printedName": "Foundation.Data",
+                        "usr": "s:10Foundation4DataV"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:23iREdSecureLinkFramework13LockAndSensorC25fetch_requestTokenCommand3otp0L3KeySSSg_10Foundation4DataVSgtSS_SStYaFZ",
+            "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC25fetch_requestTokenCommand3otp0L3KeySSSg_10Foundation4DataVSgtSS_SStYaFZ",
+            "moduleName": "iREdSecureLinkFramework",
+            "static": true,
+            "declAttributes": [
+              "Custom",
+              "Final",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:23iREdSecureLinkFramework13LockAndSensorC",
+        "mangledName": "$s23iREdSecureLinkFramework13LockAndSensorC",
+        "moduleName": "iREdSecureLinkFramework",
+        "declAttributes": [
+          "AccessControl",
+          "Custom"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/kehong01\/Documents\/GitHub\/iOS\/HealthKit\/App\/iOS App\/Lock\/Lock_Sensor-Framework\/iREdSecureLinkFramework\/Sources\/iREdSecureLinkFramework\/iREdSecureLinkFramework.swift",
+      "kind": "Dictionary",
+      "offset": 798,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/kehong01\/Documents\/GitHub\/iOS\/HealthKit\/App\/iOS App\/Lock\/Lock_Sensor-Framework\/iREdSecureLinkFramework\/Sources\/iREdSecureLinkFramework\/iREdSecureLinkFramework.swift",
+      "kind": "StringLiteral",
+      "offset": 836,
+      "length": 63,
+      "value": "\"https:\/\/prqwurhd90.execute-api.ap-east-1.amazonaws.com\/v1\/otp\""
+    },
+    {
+      "filePath": "\/Users\/kehong01\/Documents\/GitHub\/iOS\/HealthKit\/App\/iOS App\/Lock\/Lock_Sensor-Framework\/iREdSecureLinkFramework\/Sources\/iREdSecureLinkFramework\/iREdSecureLinkFramework.swift",
+      "kind": "Array",
+      "offset": 960,
+      "length": 12,
+      "value": "[0x03, 0x00]"
+    },
+    {
+      "filePath": "\/Users\/kehong01\/Documents\/GitHub\/iOS\/HealthKit\/App\/iOS App\/Lock\/Lock_Sensor-Framework\/iREdSecureLinkFramework\/Sources\/iREdSecureLinkFramework\/iREdSecureLinkFramework.swift",
+      "kind": "Array",
+      "offset": 1027,
+      "length": 12,
+      "value": "[0x20, 0x00]"
+    },
+    {
+      "filePath": "\/Users\/kehong01\/Documents\/GitHub\/iOS\/HealthKit\/App\/iOS App\/Lock\/Lock_Sensor-Framework\/iREdSecureLinkFramework\/Sources\/iREdSecureLinkFramework\/iREdSecureLinkFramework.swift",
+      "kind": "Array",
+      "offset": 1092,
+      "length": 12,
+      "value": "[0x20, 0x01]"
+    },
+    {
+      "filePath": "\/Users\/kehong01\/Documents\/GitHub\/iOS\/HealthKit\/App\/iOS App\/Lock\/Lock_Sensor-Framework\/iREdSecureLinkFramework\/Sources\/iREdSecureLinkFramework\/iREdSecureLinkFramework.swift",
+      "kind": "Array",
+      "offset": 1160,
+      "length": 12,
+      "value": "[0x20, 0x03]"
+    },
+    {
+      "filePath": "\/Users\/kehong01\/Documents\/GitHub\/iOS\/HealthKit\/App\/iOS App\/Lock\/Lock_Sensor-Framework\/iREdSecureLinkFramework\/Sources\/iREdSecureLinkFramework\/iREdSecureLinkFramework.swift",
+      "kind": "Array",
+      "offset": 1226,
+      "length": 12,
+      "value": "[0x80, 0x06]"
+    },
+    {
+      "filePath": "\/Users\/kehong01\/Documents\/GitHub\/iOS\/HealthKit\/App\/iOS App\/Lock\/Lock_Sensor-Framework\/iREdSecureLinkFramework\/Sources\/iREdSecureLinkFramework\/iREdSecureLinkFramework.swift",
+      "kind": "Array",
+      "offset": 1289,
+      "length": 12,
+      "value": "[0x80, 0x00]"
+    },
+    {
+      "filePath": "\/Users\/kehong01\/Documents\/GitHub\/iOS\/HealthKit\/App\/iOS App\/Lock\/Lock_Sensor-Framework\/iREdSecureLinkFramework\/Sources\/iREdSecureLinkFramework\/iREdSecureLinkFramework.swift",
+      "kind": "Array",
+      "offset": 1357,
+      "length": 12,
+      "value": "[0x80, 0x08]"
+    },
+    {
+      "filePath": "\/Users\/kehong01\/Documents\/GitHub\/iOS\/HealthKit\/App\/iOS App\/Lock\/Lock_Sensor-Framework\/iREdSecureLinkFramework\/Sources\/iREdSecureLinkFramework\/iREdSecureLinkFramework.swift",
+      "kind": "Array",
+      "offset": 1418,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/kehong01\/Documents\/GitHub\/iOS\/HealthKit\/App\/iOS App\/Lock\/Lock_Sensor-Framework\/iREdSecureLinkFramework\/Sources\/iREdSecureLinkFramework\/iREdSecureLinkFramework.swift",
+      "kind": "Array",
+      "offset": 1468,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/kehong01\/Documents\/GitHub\/iOS\/HealthKit\/App\/iOS App\/Lock\/Lock_Sensor-Framework\/iREdSecureLinkFramework\/Sources\/iREdSecureLinkFramework\/iREdSecureLinkFramework.swift",
+      "kind": "IntegerLiteral",
+      "offset": 23525,
+      "length": 2,
+      "value": "64"
+    },
+    {
+      "filePath": "\/Users\/kehong01\/Documents\/GitHub\/iOS\/HealthKit\/App\/iOS App\/Lock\/Lock_Sensor-Framework\/iREdSecureLinkFramework\/Sources\/iREdSecureLinkFramework\/iREdSecureLinkFramework.swift",
+      "kind": "Array",
+      "offset": 33507,
+      "length": 122,
+      "value": "[\"D0:03:01:0A:09:41\", \"F0:03:31:01:01:4C\", \"D0:03:01:08:39:C2\", \"D0:03:01:0A:6A:74\"]"
+    },
+    {
+      "filePath": "\/Users\/kehong01\/Documents\/GitHub\/iOS\/HealthKit\/App\/iOS App\/Lock\/Lock_Sensor-Framework\/iREdSecureLinkFramework\/Sources\/iREdSecureLinkFramework\/iREdSecureLinkFramework.swift",
+      "kind": "Array",
+      "offset": 33681,
+      "length": 137,
+      "value": "[\"C3:00:00:44:82:00\", \"C3:00:00:44:82:01\", \"C3:00:00:44:82:02\", \"C3:00:00:6F:76:B7\"]"
+    },
+    {
+      "filePath": "\/Users\/kehong01\/Documents\/GitHub\/iOS\/HealthKit\/App\/iOS App\/Lock\/Lock_Sensor-Framework\/iREdSecureLinkFramework\/Sources\/iREdSecureLinkFramework\/iREdSecureLinkFramework.swift",
+      "kind": "IntegerLiteral",
+      "offset": 46169,
+      "length": 4,
+      "value": "0x00"
+    },
+    {
+      "filePath": "\/Users\/kehong01\/Documents\/GitHub\/iOS\/HealthKit\/App\/iOS App\/Lock\/Lock_Sensor-Framework\/iREdSecureLinkFramework\/Sources\/iREdSecureLinkFramework\/iREdSecureLinkFramework.swift",
+      "kind": "IntegerLiteral",
+      "offset": 46531,
+      "length": 4,
+      "value": "0x00"
+    }
+  ]
+}

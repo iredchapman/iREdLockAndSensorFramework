@@ -1,28 +1,11 @@
-# **iREdLockAndSensorFramework**
+---
+name: lock_sensor_framework
+description: This skill provides instructions and code snippets for integrating the Lock_Sensor-Framework using BLEManager in SwiftUI. Use this when you need to interact with smart locks, one-time passwords (OTP), or door/window sensors via Bluetooth. It is strictly for device interaction and state management, not for general UI styling.
+---
 
+# Lock & Sensor Framework Integration Guide
 
-面向 iOS 嘅 BLE 鎖具 & 傳感器統一通訊框架。
-支援 **本地二維碼鎖、OTP 一次性密碼鎖、門磁傳感器** 等裝置嘅 **配對、連接、指令下發同數據解析**，並且提供 SwiftUI 友善嘅狀態模型。
-**最低系統版本**：iOS 17+
-
-------
-
-## **安裝方式（SPM）**
-
-喺 Xcode 入面：
-
-**File Add Package Dependency…**
-
-輸入：
-
-```
-https://github.com/iredchapman/iREdLockAndSensorFramework.git
-```
-
-揀返主 App target，打咗剔就可以加依賴。
-
-------
-
+本指南提供了在 SwiftUI 视图中使用 `BLEManager` 与锁具、一次性密码 (OTP) 以及传感器进行交互的基础代码实现和高级管理方法。
 
 ## **權限設定（Info.plist / Capabilities）**
 
@@ -48,164 +31,279 @@ https://github.com/iredchapman/iREdLockAndSensorFramework.git
 
 ------
 
-## **1. 獲取藍牙實例**
+## Prerequisites (前提准备)
+
+在需要使用这些能力的 View 中，请确保导入框架并实例化 `BLEManager` 的 `StateObject`：
 
 ```swift
-@StateObject var ble = iREdLockAndSensorBluetooth.shared
+import iREdLockAndSensor
+@StateObject var ble = BLEManager.shared
 ```
 
-內置單例 shared 已經包咗喺主線程，可以直接用喺 SwiftUI 數據綁定。
+---
 
-------
+## 1. Lock (智能锁管理)
 
-## **2. 本地二維碼鎖（Lock）**
-
-```swift
-// 註冊鎖（導入二維碼）
-ble.registerLock(qrCodeString: "<your-qr")
-
-// 掃描同配對
-ble.startScan(device: .localLock(qrCodeString: "<your-qr"))
-
-// 連接鎖
-ble.connect(to: .localLock(qrCodeString: "<your-qr"))
-
-// 常用操作
-ble.fetchTempToken(qrCodeString: "<your-qr")
-ble.unlock(qrCodeString: "<your-qr")
-ble.queryStatus(qrCodeString: "<your-qr")
-
-// 斷開
-ble.disconnect(.localLock(qrCodeString: "<your-qr"))
-```
+### 获取所有注册成功的锁具
 
 ```swift
-// 打印 Lock 全部狀態屬性示例
-if let lock = ble.lockData.first {
-    print("isRegisterSuccess: \(lock.isRegisterSuccess)")         // 是否已經註冊成功
-    print("isPairing: \(lock.isPairing)")                         // 是否處於配對中
-    print("pairStatus: \(lock.pairStatus)")                       // 配對狀態
-    print("connectStatus: \(lock.connectStatus)")                 // 鎖當前連接狀態
-    print("tempToken: \(lock.tempToken)")                         // 臨時令牌
-    print("batteryPercentage: \(lock.batteryPercentage)")         // 電池電量百分比
-    print("lockStatus: \(lock.lockStatus)")                       // 鎖的狀態（開鎖或關鎖）
-    print("icCardCount: \(lock.icCardCount)")                     // IC 卡數量
-    print("idCardCount: \(lock.idCardCount)")                     // 身份證卡數量
-    print("cardOpMessage: \(lock.cardOpMessage)")                 // 卡操作信息
-}
-```
-------
-
-## **3. OTP 鎖**
-
-```swift
-// 設定 OTP Key（建議 App 啟動時叫一次）
-ble.setOtpKey(otpKey: "<your-otp-key")
-
-// 產生 OTP（有效期 = 秒級時間戳）
-let expire = Int(Date().addingTimeInterval(600).timeIntervalSince1970)
-ble.generateOTP(qrCodeString: "<your-qr", expiredTime: expire)
-
-// 已有 OTP（手動輸入或者產生）
-let otp = "<your-otp"
-
-// 獲取 MAC & 臨時指令
-ble.getMACAddressAndTokenCommand(otp: otp)
-
-// 配對 & 連接
-ble.startScan(device: .otpLock(otp: otp))
-ble.connect(to: .otpLock(otp: otp))
-
-// 請求臨時 Token + 電量
-ble.requestTokenOTP(otp: otp)
-
-// 開鎖
-ble.unlockOTP(otp: otp)
-
-// 失效 OTP
-ble.invalidateOTP(otp: otp)
-```
-
-```swift
-// 打印 OTP Lock 全部狀態屬性示例
-if let otpLock = ble.otpLockData.first {
-    print("pairStatus: \(otpLock.pairStatus)")                     // 配對狀態
-    print("connectStatus: \(otpLock.connectStatus)")               // 連接狀態
-    print("deviceAddress: \(otpLock.deviceAddress)")               // 裝置地址
-    print("batteryPercentage: \(otpLock.batteryPercentage)")       // 電池百分比
-    print("lockStatus: \(otpLock.lockStatus)")                     // 鎖狀態
-    print("isExpired: \(otpLock.isExpired)")                       // 是否已過期
-    print("requestingTempToken: \(otpLock.requestingTempToken)")   // 是否正在請求臨時令牌
-    print("requestTempTokenError: \(otpLock.requestTempTokenError)") // 請求臨時令牌錯誤
-    print("invalidating: \(otpLock.invalidating)")                 // 是否正在失效中
+List(ble.getLocks(), id: \.id) { lock in
+    Text("QR Code String: \(lock.qrCodeString)")
 }
 ```
 
-------
+### 单锁具基础用法
 
-## **4. 傳感器（Sensor）**
-
-```swift
-// 註冊傳感器
-ble.registerSensor(qrCodeString: "<your-qr")
-
-// 開始/停止掃描
-ble.startScan(device: .sensor(qrCodeString: "<your-qr"))
-ble.stopScan(for: .sensor(qrCodeString: "<your-qr"))
-
-// 刪除傳感器
-ble.remove(device: .sensor(qrCodeString: "<your-qr"))
-```
+#### 1.1 锁具状态展示
 
 ```swift
-// 打印 Sensor 全部狀態屬性示例
-if let sensor = ble.sensorData.first {
-    print("isRegisterSuccess: \(sensor.isRegisterSuccess)")       // 是否已註冊成功
-    print("isScanning: \(sensor.isScanning)")                     // 是否正在掃描中
-    print("deviceAddress: \(sensor.deviceAddress)")               // 裝置地址
-    print("batteryPercentage: \(sensor.batteryPercentage)")       // 電池電量百分比
-    print("isOpened: \(sensor.isOpened)")                         // 門磁是否打開
-    print("isDisassembled: \(sensor.isDisassembled)")             // 是否被拆卸
+VStack(alignment: .leading) {
+    if let lock = ble.getLock(identifier: qrCodeString) {
+        Text("Pairing status：\(lock.pairStatus.rawValue)")
+        Text("Connection status：\(lock.connectStatus.rawValue)")
+        Text("Battery：\(lock.batteryPercentage)%")
+        Text("Lock status：\(lock.lockStatus.rawValue)")
+        Text("IC Card Count：\(lock.icCardCount)")
+        Text("ID Card Count：\(lock.idCardCount)")
+    }
 }
 ```
 
-傳感器廣播可以即時更新：
-
-- 電池電量（batteryPercentage）
-- 門磁狀態（isOpened）
-- 拆卸警報（isDisassembled）
-------
-
-## **5. 狀態同數據監聽**
-
-你可以透過存取裝置數據模型去監聽同讀取裝置嘅狀態資訊，例如配對狀態（pairStatus）、連接狀態（connectStatus）、鎖狀態（lockStatus）等。
-```swift
-// 藍牙整體狀態
-ble.state.ble_isOpenedBluetooth   // 有冇開啟
-ble.state.ble_isScanning          // 掃描緊冇
-ble.state.otp_generating          // 係咪生成緊 OTP
-```
+#### 1.2 注册锁具
 
 ```swift
-// 讀取本地二維碼鎖狀態
-if let lock = ble.lockData.first {
-    print("Lock pair status: \(lock.pairStatus)")
-    print("Lock connect status: \(lock.connectStatus)")
-    print("Lock status: \(lock.lockStatus)")
-}
+@State var qrCodeString: String = ""
+@State var isRegisterSuccess: Bool = false
 
-// 讀取 OTP 鎖狀態
-if let otpLock = ble.otpLockData.first {
-    print("OTP Lock pair status: \(otpLock.pairStatus)")
-    print("OTP Lock connect status: \(otpLock.connectStatus)")
-    print("OTP Lock lock status: \(otpLock.lockStatus)")
-}
-
-// 讀取傳感器狀態
-if let sensor = ble.sensorData.first {
-    print("Sensor pair status: \(sensor.pairStatus)")
-    print("Sensor connect status: \(sensor.connectStatus)")
-    print("Sensor lock status: \(sensor.lockStatus)")
+VStack {
+    Text("Registration status：\(isRegisterSuccess ? "成功" : "失败")")
+    Button(action: {
+        Task {
+            isRegisterSuccess = await ble.register(for: qrCodeString)
+        }
+    }) {
+        Text("注册")
+    }
 }
 ```
-------
+
+#### 1.3 连接与断开蓝牙连接
+
+```swift
+// 连接锁具
+ble.connect(identifier: qrCodeString)
+
+// 断开锁具蓝牙连接
+ble.disconnect(identifier: qrCodeString)
+```
+
+#### 1.4 触发开锁
+
+```swift
+ble.unlock(identifier: qrCodeString)
+```
+
+### 锁具高级管理
+
+#### 2.1 查询锁具当前闭合状态
+
+```swift
+ble.queryStatus(identifier: qrCodeString)
+```
+
+#### 2.2 门禁卡管理
+
+```swift
+// 添加门禁卡 (触发后，建议显示“请将识别卡片靠近锁具识别区域”的提示框)
+ble.addCard(identifier: qrCodeString) 
+
+// 查询门禁卡数量
+ble.queryCardCount(identifier: qrCodeString)
+
+// 删除所有门禁卡
+ble.deleteAllCard(identifier: qrCodeString)
+```
+
+#### 2.3 生成一次性密码（One Time Password）
+
+```swift
+Button(action: {
+    ble.setOtpKey(otpKey: "LEO_KEY")
+    // expiredTime 最大设定 30 天
+    let sevenDayExp = Int(Date().addingTimeInterval(7 * 24 * 60 * 60).timeIntervalSince1970)
+    Task {
+        isGeneratingOTP = true
+        isGeneratedOTPSuccess = await ble.generateOTP(qrCodeString: qrCodeString, expiredTime: sevenDayExp) 
+        isGeneratingOTP = false
+    }
+}) {
+    HStack(spacing: 6) {
+        if isGeneratingOTP {
+            ProgressView()
+        }
+        Text("生成OTP")
+    }
+}
+```
+
+#### 2.4 获取锁具的所有一次性密码记录
+
+```swift
+VStack {
+    Text("OTP Lock List")
+
+    if let lock = ble.getLock(identifier: qrCodeString) {
+        ForEach(lock.otpList, id: \.id) { item in
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("OTP: \(item.otp)")
+                    Text("过期时间: \(formatTimestamp(item.exp))")
+                }
+                Spacer()
+                Button(action: {
+                    UIPasteboard.general.string = item.otp
+                }) {
+                    Text("复制")
+                }
+            }
+        }
+    }
+}
+```
+
+---
+
+## 2. One Time Password (OTP 专用锁管理)
+
+### OTP 基础用法
+
+#### 1.1 用户填写 OTP 密码
+
+```swift
+@State var inputOTP: String = ""
+
+TextField("请输入 OTP 密码", text: $inputOTP)
+    .font(.system(.body, design: .monospaced))
+    .padding()
+    .background(Color(.systemGray6))
+    .cornerRadius(10)
+```
+
+#### 1.2 获取 OTP 锁具状态
+
+```swift
+VStack(alignment: .leading) {
+    if let lock = ble.getOtpLock(otp: inputOTP) {
+        Text("Pairing status：\(lock.pairStatus.rawValue)")
+        Text("Connection status：\(lock.connectStatus.rawValue)")
+        Text("Device Address：\(lock.deviceAddress ?? "Unknown")")
+        Text("Battery：\(lock.batteryPercentage)%")
+        Text("Lock status：\(lock.lockStatus.rawValue)")
+    }
+}
+```
+
+#### 1.3 注册 OTP 锁具
+
+```swift
+VStack(alignment: .leading) {
+    Text("Register status：\(isRegisterSuccess ? "Success" : "Failure")")
+    Button(action: {
+        Task {
+            isRegistering = true
+            isRegisterSuccess = await ble.register(for: inputOTP)
+            isRegistering = false
+        }
+    }) {
+        if isRegistering {
+            ProgressView()
+                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                .frame(maxWidth: .infinity)
+                .padding()
+        } else {
+            Text("register OTP")
+                .font(.headline)
+                .frame(maxWidth: .infinity)
+                .padding()
+        }
+    }
+    .buttonStyle(.borderedProminent)
+    .tint(.blue)
+    .disabled(isRegistering)
+}
+```
+
+#### 1.4 连接与开锁
+
+```swift
+// 连接锁具
+Button(action: {
+     ble.connect(identifier: inputOTP)
+}) {
+    Text("connect")
+}
+
+// 执行开锁
+Button(action: {
+    ble.unlock(identifier: inputOTP)
+}) {
+    Text("unlock")
+}
+```
+
+---
+
+## 3. Sensor (门窗传感器管理)
+
+### 单门窗传感器基础用法
+
+#### 1.1 传感器状态展示
+
+```swift
+VStack(alignment: .leading) {
+    if let sensor = ble.getSensor(identifier: qrCodeString) {
+        Text("Battery: \(sensor.batteryPercentage)%")
+        Text("Contact status: \(sensor.contactStatus.rawValue)")
+        Text("Tamper status: \(sensor.tamperStatus.rawValue)")
+    }
+}
+```
+
+#### 1.2 注册传感器
+
+```swift
+@State var qrCodeString: String = ""
+@State var isRegisterSuccess: Bool = false
+
+VStack(alignment: .leading) {
+    Text("Registration status：\(isRegisterSuccess ? "成功" : "失败")")
+    Button(action: {
+        Task {
+            isRegisterSuccess = await ble.register(for: qrCodeString)
+        }
+    }) {
+        Text("注册")
+            .font(.headline)
+            .frame(maxWidth: .infinity)
+            .padding()
+    }
+    .buttonStyle(.borderedProminent)
+    .tint(.blue)
+}
+```
+
+#### 1.3 开始监听传感器数据
+
+```swift
+Button(action: {
+    ble.startListeningToSensor(qrCodeString: qrCodeString)
+}) {
+    Text("开始监听传感器")
+        .font(.headline)
+        .frame(maxWidth: .infinity)
+        .padding()
+}
+.buttonStyle(.borderedProminent)
+.tint(.green)
+```
+

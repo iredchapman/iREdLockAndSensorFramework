@@ -15,15 +15,15 @@ let package = Package(
     targets: [
         .target(
             name: "iREdLockAndSensor",
-            dependencies: ["iREdLockAndSensorFramework"],
+            dependencies: ["iREdSecureLinkFramework"],
             path: "Sources",
             swiftSettings: [
-                .define("IREDLOCKANDSENSOR_FRAMEWORK")
+                .define("IREDSECURELINK_FRAMEWORK")
             ]
         ),
         .binaryTarget(
-            name: "iREdLockAndSensorFramework",
-            path: "./Frameworks/iREdLockAndSensorFramework.xcframework"
+            name: "iREdSecureLinkFramework",
+            path: "Frameworks/iREdSecureLinkFramework.xcframework"
         )
 
     ]
