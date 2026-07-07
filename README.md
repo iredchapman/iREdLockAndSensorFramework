@@ -257,6 +257,14 @@ Button(action: {
 
 ### 單門窗傳感器基礎用法
 
+### 獲取所有註冊成功的傳感器
+
+```swift
+List(ble.getSensors(), id: \.id) { sensor in
+    Text("QR Code String: \(sensor.qrCodeString)")
+}
+```
+
 #### 1.1 傳感器狀態展示
 
 ```swift
