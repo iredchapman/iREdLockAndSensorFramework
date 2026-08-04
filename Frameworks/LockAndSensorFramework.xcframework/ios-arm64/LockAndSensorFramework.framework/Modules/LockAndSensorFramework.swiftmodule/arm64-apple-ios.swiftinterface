@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.4 (swiftlang-6.4.0.27.1 clang-2100.3.27.1)
-// swift-module-flags: -target arm64-apple-ios17.0 -enable-objc-interop -enable-library-evolution -language-mode 6 -O -enable-experimental-feature DebugDescriptionMacro -module-name LockAndSensorFramework -package-name lockandsensorframework
-// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.4
+// swift-compiler-version: Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)
+// swift-module-flags: -target arm64-apple-ios17.0 -enable-objc-interop -enable-library-evolution -swift-version 6 -O -enable-experimental-feature DebugDescriptionMacro -module-name LockAndSensorFramework -package-name lockandsensorframework
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3.3
 import Combine
 import CommonCrypto
 import CoreBluetooth
@@ -11,97 +11,97 @@ import SwiftUI
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-@_Concurrency::MainActor public class LockAndSensor {
-  @_Concurrency::MainActor public init()
-  @_Concurrency::MainActor weak public static var delegate: (any LockAndSensorFramework::LockAndSensorFrameworkDelegate)?
+@_Concurrency.MainActor public class LockAndSensor {
+  @_Concurrency.MainActor public init()
+  @_Concurrency.MainActor weak public static var delegate: (any LockAndSensorFramework.LockAndSensorFrameworkDelegate)?
   @objc deinit
 }
 public protocol LockAndSensorFrameworkDelegate : AnyObject {
-  func lockCallback(didDecode response: LockAndSensorFramework::LockResponse)
-  func doorSensorCallback(deviceAddress: Swift::String?, didDecodeSensor response: LockAndSensorFramework::SensorResponse)
+  func lockCallback(didDecode response: LockAndSensorFramework.LockResponse)
+  func doorSensorCallback(deviceAddress: Swift.String?, didDecodeSensor response: LockAndSensorFramework.SensorResponse)
 }
-extension LockAndSensorFramework::LockAndSensor {
-  @_Concurrency::MainActor public func setLockCredentials(fromQRCode base64String: Swift::String) -> (qrCodeString: Swift::String, deviceAddress: Swift::String?, isSuccess: Swift::Bool)
-  @_Concurrency::MainActor public static func isLock(peripheral: CoreBluetooth::CBPeripheral, manufacturerData: Foundation::Data?) -> Swift::String?
-  @_Concurrency::MainActor public static func getLockMAC(manufacturerData: Foundation::Data) -> Swift::String?
-  @_Concurrency::MainActor public func BLE_RequestTokenCommand(deviceAddress mac: Swift::String) throws -> Foundation::Data
-  @_Concurrency::MainActor public func BLE_UnlockCommand(deviceAddress mac: Swift::String) throws -> Foundation::Data
-  @_Concurrency::MainActor public func BLE_LockStatusCommand(deviceAddress mac: Swift::String) throws -> Foundation::Data
-  @_Concurrency::MainActor public func BLE_AddCardCommand(deviceAddress mac: Swift::String) throws -> Foundation::Data
-  @_Concurrency::MainActor public func BLE_QueryCardCountCommand(deviceAddress mac: Swift::String) throws -> Foundation::Data
-  @_Concurrency::MainActor public func BLE_DeleteAllCardsCommand(deviceAddress mac: Swift::String) throws -> Foundation::Data
-  @_Concurrency::MainActor public static func CreateHttpPostBody_GenerateOTP(credentials: Swift::String, expiredTime: Swift::Int, otpKey: Swift::String) async -> (Swift::String?, Swift::Int?)
-  @_Concurrency::MainActor public static func CreateHttpPostBody_HandleBleResponseCommand(oneTimePassword otp: Swift::String, bleResponse: Foundation::Data, otpKey: Swift::String) async
-  @_Concurrency::MainActor public static func CreateHttpPostBody_GetMACAddressAndTokenCommand(oneTimePassword: Swift::String, otpKey: Swift::String) async -> (Swift::String?, Foundation::Data?)
-  @_Concurrency::MainActor public static func CreateHttpPostBody_InvalidateOTPCommand(oneTimePassword: Swift::String, otpKey: Swift::String) async
-  @_Concurrency::MainActor public func decodBleLockData(peripheral: CoreBluetooth::CBPeripheral, encrypted data: Foundation::Data)
+extension LockAndSensorFramework.LockAndSensor {
+  @_Concurrency.MainActor public func setLockCredentials(fromQRCode base64String: Swift.String) -> (qrCodeString: Swift.String, deviceAddress: Swift.String?, isSuccess: Swift.Bool)
+  @_Concurrency.MainActor public static func isLock(peripheral: CoreBluetooth.CBPeripheral, manufacturerData: Foundation.Data?) -> Swift.String?
+  @_Concurrency.MainActor public static func getLockMAC(manufacturerData: Foundation.Data) -> Swift.String?
+  @_Concurrency.MainActor public func BLE_RequestTokenCommand(deviceAddress mac: Swift.String) throws -> Foundation.Data
+  @_Concurrency.MainActor public func BLE_UnlockCommand(deviceAddress mac: Swift.String) throws -> Foundation.Data
+  @_Concurrency.MainActor public func BLE_LockStatusCommand(deviceAddress mac: Swift.String) throws -> Foundation.Data
+  @_Concurrency.MainActor public func BLE_AddCardCommand(deviceAddress mac: Swift.String) throws -> Foundation.Data
+  @_Concurrency.MainActor public func BLE_QueryCardCountCommand(deviceAddress mac: Swift.String) throws -> Foundation.Data
+  @_Concurrency.MainActor public func BLE_DeleteAllCardsCommand(deviceAddress mac: Swift.String) throws -> Foundation.Data
+  @_Concurrency.MainActor public static func CreateHttpPostBody_GenerateOTP(credentials: Swift.String, expiredTime: Swift.Int, otpKey: Swift.String) async -> (Swift.String?, Swift.Int?)
+  @_Concurrency.MainActor public static func CreateHttpPostBody_HandleBleResponseCommand(oneTimePassword otp: Swift.String, bleResponse: Foundation.Data, otpKey: Swift.String) async
+  @_Concurrency.MainActor public static func CreateHttpPostBody_GetMACAddressAndTokenCommand(oneTimePassword: Swift.String, otpKey: Swift.String) async -> (Swift.String?, Foundation.Data?)
+  @_Concurrency.MainActor public static func CreateHttpPostBody_InvalidateOTPCommand(oneTimePassword: Swift.String, otpKey: Swift.String) async
+  @_Concurrency.MainActor public func decodBleLockData(peripheral: CoreBluetooth.CBPeripheral, encrypted data: Foundation.Data)
 }
 public enum LockCardType {
   case ic
   case id
-  public static func == (a: LockAndSensorFramework::LockCardType, b: LockAndSensorFramework::LockCardType) -> Swift::Bool
-  public func hash(into hasher: inout Swift::Hasher)
-  public var hashValue: Swift::Int {
+  public static func == (a: LockAndSensorFramework.LockCardType, b: LockAndSensorFramework.LockCardType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
     get
   }
 }
 public enum LockResponse {
-  case tokenRecievedEvent(deviceAddress: Swift::String, batteryPercentage: Swift::Int)
-  case unlockResponseEvent(deviceAddress: Swift::String, isLocked: Swift::Bool)
-  case queryLockStatus(deviceAddress: Swift::String, isLocked: Swift::Bool)
-  case addCardEvent(deviceAddress: Swift::String, isSuccess: Swift::Bool, cardType: LockAndSensorFramework::LockCardType?)
-  case deleteAllCardEvent(deviceAddress: Swift::String, isSuccess: Swift::Bool)
-  case queryCardCountEvent(deviceAddress: Swift::String, icCardCount: Swift::Int, idCardCount: Swift::Int)
-  case otpInvalidateOTPEvent(otp: Swift::String, isSuccess: Swift::Bool)
-  case otpLockStatusEvent(otp: Swift::String, isLocked: Swift::Bool)
-  case lockDataAndUnlockCommand(otp: Swift::String, unlockCommand: Foundation::Data?, batteryPercent: Swift::Int?)
-  case unknown(raw: Foundation::Data)
+  case tokenRecievedEvent(deviceAddress: Swift.String, batteryPercentage: Swift.Int)
+  case unlockResponseEvent(deviceAddress: Swift.String, isLocked: Swift.Bool)
+  case queryLockStatus(deviceAddress: Swift.String, isLocked: Swift.Bool)
+  case addCardEvent(deviceAddress: Swift.String, isSuccess: Swift.Bool, cardType: LockAndSensorFramework.LockCardType?)
+  case deleteAllCardEvent(deviceAddress: Swift.String, isSuccess: Swift.Bool)
+  case queryCardCountEvent(deviceAddress: Swift.String, icCardCount: Swift.Int, idCardCount: Swift.Int)
+  case otpInvalidateOTPEvent(otp: Swift.String, isSuccess: Swift.Bool)
+  case otpLockStatusEvent(otp: Swift.String, isLocked: Swift.Bool)
+  case lockDataAndUnlockCommand(otp: Swift.String, unlockCommand: Foundation.Data?, batteryPercent: Swift.Int?)
+  case unknown(raw: Foundation.Data)
 }
-extension LockAndSensorFramework::LockAndSensor {
-  @_Concurrency::MainActor public func setSensorCredentials(fromQRCode qrCodeString: Swift::String) -> (qrCodeString: Swift::String, deviceAddress: Swift::String?, isSuccess: Swift::Bool)
-  @_Concurrency::MainActor public static func isSensor(peripheral: CoreBluetooth::CBPeripheral, manufacturerData: Foundation::Data?) -> Swift::Bool
-  @_Concurrency::MainActor public static func handleSensorBroadcast(peripheral: CoreBluetooth::CBPeripheral, manufacturerData data: Foundation::Data)
-  @_Concurrency::MainActor public static func getSensorMAC(manufacturerData: Foundation::Data) -> Swift::String?
+extension LockAndSensorFramework.LockAndSensor {
+  @_Concurrency.MainActor public func setSensorCredentials(fromQRCode qrCodeString: Swift.String) -> (qrCodeString: Swift.String, deviceAddress: Swift.String?, isSuccess: Swift.Bool)
+  @_Concurrency.MainActor public static func isSensor(peripheral: CoreBluetooth.CBPeripheral, manufacturerData: Foundation.Data?) -> Swift.Bool
+  @_Concurrency.MainActor public static func handleSensorBroadcast(peripheral: CoreBluetooth.CBPeripheral, manufacturerData data: Foundation.Data)
+  @_Concurrency.MainActor public static func getSensorMAC(manufacturerData: Foundation.Data) -> Swift.String?
 }
-public enum SensorResponse : Swift::Equatable {
-  case batteryLevelEvent(deviceAddress: Swift::String, batteryPercentage: Swift::Int)
-  case doorStatusEvent(deviceAddress: Swift::String, isDoorOpen: Swift::Bool, isDisassembled: Swift::Bool)
-  public static func == (a: LockAndSensorFramework::SensorResponse, b: LockAndSensorFramework::SensorResponse) -> Swift::Bool
+public enum SensorResponse : Swift.Equatable {
+  case batteryLevelEvent(deviceAddress: Swift.String, batteryPercentage: Swift.Int)
+  case doorStatusEvent(deviceAddress: Swift.String, isDoorOpen: Swift.Bool, isDisassembled: Swift.Bool)
+  public static func == (a: LockAndSensorFramework.SensorResponse, b: LockAndSensorFramework.SensorResponse) -> Swift.Bool
 }
 public struct PIRSensorParseResult {
-  public var macAddress: Swift::String?
-  public var battery: Swift::Int?
-  public var temperature: Swift::Double?
-  public var humidity: Swift::Double?
-  public var xValue: Swift::Double?
-  public var yValue: Swift::Double?
-  public var zValue: Swift::Double?
-  public var pirState: Swift::String?
-  public var name: Swift::String?
-  public var lumens: Swift::Int?
-  public var rssi: Swift::Int?
-  public var matchedDescriptions: [Swift::String]
-  public var parsedDataStrings: [Swift::String]
-  public var matchedAnyConfig: Swift::Bool
+  public var macAddress: Swift.String?
+  public var battery: Swift.Int?
+  public var temperature: Swift.Double?
+  public var humidity: Swift.Double?
+  public var xValue: Swift.Double?
+  public var yValue: Swift.Double?
+  public var zValue: Swift.Double?
+  public var pirState: Swift.String?
+  public var name: Swift.String?
+  public var lumens: Swift.Int?
+  public var rssi: Swift.Int?
+  public var matchedDescriptions: [Swift.String]
+  public var parsedDataStrings: [Swift.String]
+  public var matchedAnyConfig: Swift.Bool
   public init()
 }
 public struct PIRSensorParser {
-  public static func parse(bytes: [Swift::UInt8], rawHex: Swift::String) -> LockAndSensorFramework::PIRSensorParseResult?
+  public static func parse(bytes: [Swift.UInt8], rawHex: Swift.String) -> LockAndSensorFramework.PIRSensorParseResult?
 }
 public protocol PIRSensorDelegate : AnyObject {
-  func pirSensor(_ sensor: LockAndSensorFramework::PIRSensor, didUpdateDevice macAddress: Swift::String, result: LockAndSensorFramework::PIRSensorParseResult)
-  func pirSensor(_ sensor: LockAndSensorFramework::PIRSensor, didLog message: Swift::String)
+  func pirSensor(_ sensor: LockAndSensorFramework.PIRSensor, didUpdateDevice macAddress: Swift.String, result: LockAndSensorFramework.PIRSensorParseResult)
+  func pirSensor(_ sensor: LockAndSensorFramework.PIRSensor, didLog message: Swift.String)
 }
-extension LockAndSensorFramework::PIRSensorDelegate {
-  public func pirSensor(_ sensor: LockAndSensorFramework::PIRSensor, didLog message: Swift::String)
+extension LockAndSensorFramework.PIRSensorDelegate {
+  public func pirSensor(_ sensor: LockAndSensorFramework.PIRSensor, didLog message: Swift.String)
 }
 public class PIRSensor {
-  weak public var delegate: (any LockAndSensorFramework::PIRSensorDelegate)?
+  weak public var delegate: (any LockAndSensorFramework.PIRSensorDelegate)?
   public init()
-  public func setSensorCredentials(fromQRCode qrCodeString: Swift::String) -> (qrCodeString: Swift::String, deviceAddress: Swift::String?, isSuccess: Swift::Bool)
-  public func process(peripheral: CoreBluetooth::CBPeripheral, advertisementData: [Swift::String : Any], rssi: Swift::Int? = nil, macAddressList: [Swift::String] = [])
+  public func setSensorCredentials(fromQRCode qrCodeString: Swift.String) -> (qrCodeString: Swift.String, deviceAddress: Swift.String?, isSuccess: Swift.Bool)
+  public func process(peripheral: CoreBluetooth.CBPeripheral, advertisementData: [Swift.String : Any], rssi: Swift.Int? = nil, macAddressList: [Swift.String] = [])
   @objc deinit
 }
-extension LockAndSensorFramework::LockAndSensor : Swift::Sendable {}
-extension LockAndSensorFramework::LockCardType : Swift::Equatable {}
-extension LockAndSensorFramework::LockCardType : Swift::Hashable {}
+extension LockAndSensorFramework.LockAndSensor : Swift.Sendable {}
+extension LockAndSensorFramework.LockCardType : Swift.Equatable {}
+extension LockAndSensorFramework.LockCardType : Swift.Hashable {}
