@@ -1,7 +1,7 @@
 import Foundation
 import CoreBluetooth
 import Combine
-// import LockAndSensorFramework
+import LockAndSensorFramework
 
 @MainActor
 public final class BLEManager: NSObject, ObservableObject, @unchecked Sendable {
