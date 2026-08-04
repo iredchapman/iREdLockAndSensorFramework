@@ -23,7 +23,6 @@ public struct iREdOtpLockModel: Identifiable {
 
     public var pairStatus: PairStatus = .notPair
     public var connectStatus: ConnectStatus = .unknown
-    public var tempToken: Data?
     
     public var updatedAt: Date = Date()
 
@@ -32,4 +31,6 @@ public struct iREdOtpLockModel: Identifiable {
         self.deviceAddress = deviceAddress
         self.requestTokenCommand = requestTokenCommand
     }
+    public var blePeripheralInfo: BLEPeripheralInfo?
+    public var isConnection: Bool = false // 控制是否需要连接锁具
 }

@@ -1,11 +1,5 @@
 import Foundation
 
-public protocol DeviceIdentifiable: Identifiable {
-    var id: UUID { get }
-    var deviceAddress: String { get set }
-    var updatedAt: Date? { get set }
-}
-
 public enum ContactStatus: String, Codable, Sendable {
     case closed = "Closed"
     case opened = "Opened"
@@ -18,11 +12,11 @@ public enum TamperStatus: String, Codable, Sendable {
     case unknown = "Unknown"
 }
 
-public struct iREdSensorModel: DeviceIdentifiable, Equatable, Codable {
+public struct iREdSensorModel: Identifiable {
     public var id: UUID = UUID()
     
     public var qrCodeString: String
-    public var deviceAddress: String
+    public var deviceAddress: String? = nil
 
     public var batteryPercentage: Int = 0
     public var contactStatus: ContactStatus = .unknown
@@ -33,16 +27,12 @@ public struct iREdSensorModel: DeviceIdentifiable, Equatable, Codable {
     public var customName: String?
     public var customLabel: String?
     public var customDescription: String?
-    
-    private enum CodingKeys: String, CodingKey {
-        case qrCodeString, deviceAddress
-        case batteryPercentage, contactStatus, tamperStatus
-        case updatedAt
-        case customName, customLabel, customDescription
-    }
 
-    public init(qrCodeString: String, deviceAddress: String) {
+    public init(qrCodeString: String, deviceAddress: String? = nil) {
         self.qrCodeString = qrCodeString
         self.deviceAddress = deviceAddress
     }
+    
+    public var blePeripheralInfo: BLEPeripheralInfo?
+    public var isListening: Bool = false    // 是否开启监听
 }

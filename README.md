@@ -1,11 +1,11 @@
 ---
 name: lock_sensor_framework
-description: This skill provides instructions and code snippets for integrating the Lock_Sensor-Framework using BLEManager in SwiftUI. Use this when you need to interact with smart locks, one-time passwords (OTP), or door/window sensors via Bluetooth. It is strictly for device interaction and state management, not for general UI styling.
+description: This skill provides instructions and code snippets for integrating the Lock_Sensor-Framework using BLEManager in SwiftUI. Use this when you need to interact with smart locks, one-time passwords (OTP), door/window sensors, or PIR motion sensors via Bluetooth. It is strictly for device interaction and state management, not for general UI styling.
 ---
 
-# Lock & Sensor Framework Integration Guide
+# Lock & Sensor Framework 整合指南
 
-本指南提供了在 SwiftUI 視圖中使用 `BLEManager` 與鎖具、一次性密碼 (OTP) 以及傳感器進行互動的基礎代碼實現和高級管理方法。
+本指南提供了在 SwiftUI 視圖中使用 `BLEManager` 與鎖具、一次性密碼 (OTP) 以及感應器進行互動的基礎代碼實現和高級管理方法。
 
 ## **權限設定（Info.plist / Capabilities）**
 
@@ -15,11 +15,11 @@ description: This skill provides instructions and code snippets for integrating 
 
 - Privacy - Bluetooth Always Usage Description
 
-  例如：需要用藍牙連接鎖具同傳感器
+  例如：需要用藍牙連接鎖具和感應器
 
 - Privacy - Camera Usage Description
 
-  例如：用嚟掃裝置二維碼
+  例如：用於掃描裝置二維碼
 
 
 ### **示例截圖**
@@ -33,7 +33,7 @@ description: This skill provides instructions and code snippets for integrating 
 
 ## Prerequisites (前提準備)
 
-在需要使用這些能力的 View 中，請確保導入框架並實例化 `BLEManager` 的 `StateObject`：
+在需要使用這些功能的 View 中，請確保匯入框架並實例化 `BLEManager` 的 `StateObject`：
 
 ```swift
 import iREdLockAndSensor
@@ -44,273 +44,435 @@ import iREdLockAndSensor
 
 ## 1. Lock (智能鎖管理)
 
-### 獲取所有註冊成功的鎖具
+### 步驟一：匯入框架與建立 ViewModel 綁定
+
+`iREdLockAndSensor` 提供了單例物件 `BLEManager.shared` 用於集中管理藍牙互動。
+
+在你的 `View` 中綁定藍牙管理器以及必要的輸入狀態變數：
 
 ```swift
-List(ble.getLocks(), id: \.id) { lock in
-    Text("QR Code String: \(lock.qrCodeString)")
-}
-```
-
-### 單鎖具基礎用法
-
-#### 1.1 鎖具狀態展示
-
-```swift
-VStack(alignment: .leading) {
-    if let lock = ble.getLock(identifier: qrCodeString) {
-        Text("Pairing status：\(lock.pairStatus.rawValue)")
-        Text("Connection status：\(lock.connectStatus.rawValue)")
-        Text("Battery：\(lock.batteryPercentage)%")
-        Text("Lock status：\(lock.lockStatus.rawValue)")
-        Text("IC Card Count：\(lock.icCardCount)")
-        Text("ID Card Count：\(lock.idCardCount)")
+struct LockView: View {
+    // 綁定藍牙單例物件
+    @StateObject var ble = BLEManager.shared
+    
+    // 輸入框綁定變數
+    @State var qrCode: String = ""
+    @State var invalidateOTPString: String = ""
+    
+    var body: some View {
+        Form {
+            // 後續步驟的控制項依次放入 Form 中
+        }
     }
 }
 ```
 
-#### 1.2 註冊鎖具
+### 步驟二：實現裝置註冊功能
+
+使用者輸入裝置二維碼字串（QR Code String）後，呼叫 `register(for:)` 異步方法完成鎖裝置的初始化註冊：
 
 ```swift
-@State var qrCodeString: String = ""
-@State var isRegisterSuccess: Bool = false
-
-VStack {
-    Text("Registration status：\(isRegisterSuccess ? "成功" : "失敗")")
-    Button(action: {
+HStack {
+    TextField("QR Code String", text: $qrCode)
+    Button {
         Task {
-            isRegisterSuccess = await ble.register(for: qrCodeString)
+            // 異步註冊鎖
+            await ble.register(for: qrCode)
         }
-    }) {
-        Text("註冊")
+    } label: {
+        Text("Register Lock")
     }
 }
 ```
 
-#### 1.3 連接與斷開藍牙連接
+### 步驟三：實現藍牙連接與基礎控制
+
+透過走訪 `ble.locks` 獲取裝置列表，並針對單個鎖裝置綁定以下控制指令：
 
 ```swift
-// 連接鎖具
-ble.connect(identifier: qrCodeString)
-
-// 斷開鎖具藍牙連接
-ble.disconnect(identifier: qrCodeString)
-```
-
-#### 1.4 觸發開鎖
-
-```swift
-ble.unlock(identifier: qrCodeString)
-```
-
-### 鎖具高級管理
-
-#### 2.1 查詢鎖具當前閉合狀態
-
-```swift
-ble.queryStatus(identifier: qrCodeString)
-```
-
-#### 2.2 門禁卡管理
-
-```swift
-// 添加門禁卡 (觸發後，建議顯示「請將識別卡片靠近鎖具識別區域」的提示框)
-ble.addCard(identifier: qrCodeString) 
-
-// 查詢門禁卡數量
-ble.queryCardCount(identifier: qrCodeString)
-
-// 刪除所有門禁卡
-ble.deleteAllCard(identifier: qrCodeString)
-```
-
-#### 2.3 生成一次性密碼（One Time Password）
-
-```swift
-Button(action: {
-    ble.setOtpKey(otpKey: "LEO_KEY")
-    // expiredTime 最大設定 30 天
-    let sevenDayExp = Int(Date().addingTimeInterval(7 * 24 * 60 * 60).timeIntervalSince1970)
-    Task {
-        isGeneratingOTP = true
-        isGeneratedOTPSuccess = await ble.generateOTP(qrCodeString: qrCodeString, expiredTime: sevenDayExp) 
-        isGeneratingOTP = false
-    }
-}) {
-    HStack(spacing: 6) {
-        if isGeneratingOTP {
-            ProgressView()
+List(ble.locks) { lock in
+    VStack(alignment: .leading, spacing: 4) {
+        // 1. 基礎資訊展示
+        Text("QR Code String: \(lock.qrCodeString.prefix(10)) ...")
+        Text("Address: \(lock.deviceAddress ?? "Unknown")")
+        Text("Pair Status: \(lock.pairStatus.rawValue)")
+        Text("Connect Status: \(lock.connectStatus.rawValue)")
+        Text("Battery: \(lock.batteryPercentage)")
+        Text("Lock Status: \(lock.lockStatus.rawValue)")
+        
+        // 2. 連接 / 斷開連接
+        HStack {
+            Button("Connect") {
+                ble.connect(identifier: lock.qrCodeString)
+            }
+            Button("Disconnect") {
+                ble.disconnect(identifier: lock.qrCodeString)
+            }
         }
-        Text("生成OTP")
-    }
-}
-```
-
-#### 2.4 獲取鎖具的所有一次性密碼記錄
-
-```swift
-VStack {
-    Text("OTP Lock List")
-
-    if let lock = ble.getLock(identifier: qrCodeString) {
-        ForEach(lock.otpList, id: \.id) { item in
-            HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("OTP: \(item.otp)")
-                    Text("過期時間: \(formatTimestamp(item.exp))")
-                }
-                Spacer()
-                Button(action: {
-                    UIPasteboard.general.string = item.otp
-                }) {
-                    Text("複製")
-                }
+        
+        // 3. 開鎖 / 查詢狀態
+        HStack {
+            Button("Unlock") {
+                ble.unlock(identifier: lock.qrCodeString)
+            }
+            Button("Query Status") {
+                ble.queryStatus(identifier: lock.qrCodeString)
             }
         }
     }
 }
 ```
 
+### 步驟四：實現 IC/ID 卡管理
+
+智能鎖支援讀取、清空及查詢卡片資訊：
+
+```swift
+// 1. 卡片數量資訊展示
+Text("IC Card Count: \(lock.icCardCount)")
+Text("ID Card Count: \(lock.idCardCount)")
+
+// 2. 卡片操作按鈕組
+HStack {
+    // 進入錄卡模式
+    Button("Add Card") {
+        ble.addCard(identifier: lock.qrCodeString)
+    }
+    // 刪除所有已錄入的卡片
+    Button("Delete All Cards") {
+        ble.deleteAllCard(identifier: lock.qrCodeString)
+    }
+    // 查詢目前已儲存的卡片總數
+    Button("Query number of Card Stored") {
+        ble.queryCardCount(identifier: lock.qrCodeString)
+    }
+}
+```
+
+### 步驟五：實現 OTP 動態密碼生成與作廢
+
+#### 1. 生成 OTP (生成 24 小時後過期的動態密碼)
+
+傳入鎖標識及 Unix 時間戳記作為過期時間：
+
+```swift
+Button("Generate OTP") {
+    let expiredTime = Int(Date().addingTimeInterval(86400).timeIntervalSince1970)
+    Task {
+        await ble.generateOTP(qrCodeString: lock.qrCodeString, expiredTime: expiredTime)
+    }
+}
+```
+
+#### 2. 作廢指定的 OTP
+
+提供輸入框獲取目標 OTP 並呼叫作廢介面：
+
+```swift
+HStack {
+    TextField(text: $invalidateOTPString, prompt: Text("Please enter the one-time password to be invalidated.")) {
+        Text("Invalidate OTP")
+    }
+    Button("Invalidate OTP") {
+        ble.invalidateOTP(otp: invalidateOTPString)
+    }
+}
+```
+
+#### 3. 展示裝置目前的 OTP 列表
+
+```swift
+List(lock.otpList) { otp in
+    HStack {
+        Text(otp.otp).textSelection(.enabled)
+        let dateString = DateFormatter.localizedString(
+            from: Date(timeIntervalSince1970: TimeInterval(otp.exp)), 
+            dateStyle: .medium, 
+            timeStyle: .medium
+        )
+        Text("Exp Date: \(dateString)")
+    }
+}
+```
+
+### 步驟六：初始化 OTP Key
+
+在視圖載入（`.onAppear`）時，**必須**先設定應用程式的 OTP 金鑰：
+
+```swift
+.onAppear {
+    ble.setOtpKey(otpKey: "CHANGE_THIS_KEY_FOR_YOUR_APP")
+}
+```
+
 ---
+
+
 
 ## 2. One Time Password (OTP 專用鎖管理)
 
-### OTP 基礎用法
+### 步驟一：匯入框架與建立 View 狀態綁定
 
-#### 1.1 用戶填寫 OTP 密碼
+`iREdLockAndSensor` 的核心單例為 `BLEManager.shared`。
 
-```swift
-@State var inputOTP: String = ""
-
-TextField("請輸入 OTP 密碼", text: $inputOTP)
-    .font(.system(.body, design: .monospaced))
-    .padding()
-    .background(Color(.systemGray6))
-    .cornerRadius(10)
-```
-
-#### 1.2 獲取 OTP 鎖具狀態
+首先，在視圖中定義對 `BLEManager.shared` 的監聽，以及用於儲存輸入的 OTP 字串和註冊結果的本地狀態變數：
 
 ```swift
-VStack(alignment: .leading) {
-    if let lock = ble.getOtpLock(otp: inputOTP) {
-        Text("Pairing status：\(lock.pairStatus.rawValue)")
-        Text("Connection status：\(lock.connectStatus.rawValue)")
-        Text("Device Address：\(lock.deviceAddress ?? "Unknown")")
-        Text("Battery：\(lock.batteryPercentage)%")
-        Text("Lock status：\(lock.lockStatus.rawValue)")
+struct OTPLockView: View {
+    // 監聽藍牙單例物件
+    @StateObject var ble = BLEManager.shared
+    
+    // 使用者輸入的 OTP 密碼
+    @State var inputOTP: String = ""
+    
+    // 註冊結果狀態標記
+    @State var isRegisterSuccess: Bool = false
+    
+    var body: some View {
+        Form {
+            // 後續步驟的 UI 元素放置於此
+        }
     }
 }
 ```
 
-#### 1.3 註冊 OTP 鎖具
+### 步驟二：實現 OTP 註冊功能
+
+使用者在輸入框輸入一次性密碼（OTP）後，呼叫 `ble.register(for:)` 異步方法完成鎖的鑑權與註冊。
 
 ```swift
-VStack(alignment: .leading) {
-    Text("Register status：\(isRegisterSuccess ? "Success" : "Failure")")
-    Button(action: {
+HStack {
+    TextField("Input OTP", text: $inputOTP)
+    Button {
         Task {
-            isRegistering = true
+            // 異步提交 OTP 註冊，並更新註冊結果變數
             isRegisterSuccess = await ble.register(for: inputOTP)
-            isRegistering = false
         }
-    }) {
-        if isRegistering {
-            ProgressView()
-                .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                .frame(maxWidth: .infinity)
-                .padding()
-        } else {
-            Text("register OTP")
-                .font(.headline)
-                .frame(maxWidth: .infinity)
-                .padding()
-        }
+    } label: {
+        Text("Register OTP")
     }
-    .buttonStyle(.borderedProminent)
-    .tint(.blue)
-    .disabled(isRegistering)
+}
+
+// 即時顯示註冊結果狀態
+Text("Register Success: \(String(describing: isRegisterSuccess))")
+```
+
+### 步驟三：實現 OTP 鎖列表展示與狀態監聽
+
+當透過 OTP 成功註冊鎖後，`ble.otpLocks` 陣列會自動包含該鎖的資訊。走訪該列表可以即時展示裝置狀態：
+
+```swift
+List(ble.otpLocks) { otpLock in
+    // 配對狀態
+    Text("Pair Status: \(otpLock.pairStatus.rawValue)")
+    
+    // 連接狀態
+    Text("Connect Status: \(otpLock.connectStatus.rawValue)")
+    
+    // 電池電量
+    Text("Battery: \(otpLock.batteryPercentage)")
+    
+    // 鎖開合狀態
+    Text("Lock Status: \(otpLock.lockStatus.rawValue)")
+    
+    // ... 後續操作按鈕放置於此處
 }
 ```
 
-#### 1.4 連接與開鎖
+### 步驟四：實現藍牙連接與開鎖指令
+
+針對列表中指定的 `otpLock`，使用其 `otp` 作為唯一識別碼（`identifier`）傳送藍牙指令：
 
 ```swift
-// 連接鎖具
-Button(action: {
-     ble.connect(identifier: inputOTP)
-}) {
-    Text("connect")
+HStack {
+    // 1. 發起藍牙連接
+    Button("Connect") {
+        ble.connect(identifier: otpLock.otp)
+    }
+    
+    // 2. 傳送解鎖指令
+    Button("Unlock") {
+        ble.unlock(identifier: otpLock.otp)
+    }
 }
-
-// 執行開鎖
-Button(action: {
-    ble.unlock(identifier: inputOTP)
-}) {
-    Text("unlock")
-}
+.buttonStyle(.borderedProminent)
 ```
 
 ---
 
-## 3. Sensor (門窗傳感器管理)
 
-### 單門窗傳感器基礎用法
 
-### 獲取所有註冊成功的傳感器
+## 3. Sensor (門窗感應器管理)
 
-```swift
-List(ble.getSensors(), id: \.id) { sensor in
-    Text("QR Code String: \(sensor.qrCodeString)")
-}
-```
+### 步驟一：匯入框架與綁定 View 狀態
 
-#### 1.1 傳感器狀態展示
+使用單例物件 `BLEManager.shared` 進行集中狀態管理。在 View 中建立綁定：
 
 ```swift
-VStack(alignment: .leading) {
-    if let sensor = ble.getSensor(identifier: qrCodeString) {
-        Text("Battery: \(sensor.batteryPercentage)%")
-        Text("Contact status: \(sensor.contactStatus.rawValue)")
-        Text("Tamper status: \(sensor.tamperStatus.rawValue)")
-    }
-}
-```
-
-#### 1.2 註冊傳感器
-
-```swift
-@State var qrCodeString: String = ""
-@State var isRegisterSuccess: Bool = false
-
-VStack(alignment: .leading) {
-    Text("Registration status：\(isRegisterSuccess ? "成功" : "失敗")")
-    Button(action: {
-        Task {
-            isRegisterSuccess = await ble.register(for: qrCodeString)
+struct SensorView: View {
+    // 監聽藍牙管理器單例
+    @StateObject var ble = BLEManager.shared
+    
+    // 綁定二維碼輸入框字串
+    @State var qrCode: String = ""
+    
+    var body: some View {
+        Form {
+            // 後續 UI 控制項依次放入 Form 中
         }
-    }) {
-        Text("註冊")
-            .font(.headline)
-            .frame(maxWidth: .infinity)
-            .padding()
     }
-    .buttonStyle(.borderedProminent)
-    .tint(.blue)
 }
 ```
 
-#### 1.3 開始監聽傳感器數據
+### 步驟二：實現感應器註冊功能
+
+使用者輸入感應器的二維碼字串（QR Code String）後，呼叫 `ble.register(for:)` 異步方法註冊裝置：
 
 ```swift
-Button(action: {
-    ble.startListeningToSensor(qrCodeString: qrCodeString)
-}) {
-    Text("開始監聽傳感器")
-        .font(.headline)
-        .frame(maxWidth: .infinity)
-        .padding()
+HStack {
+    TextField("QR Code String", text: $qrCode)
+    Button {
+        Task {
+            // 異步註冊感應器
+            await ble.register(for: qrCode)
+        }
+    } label: {
+        Text("Register Sensor")
+    }
+}
+```
+
+### 步驟三：實現感應器列表展示與數據監聽
+
+註冊完成後，感應器物件會自動推入 `ble.sensors` 列表中。走訪該陣列，可以讀取並即時展示感應器的物理狀態與更新時間：
+
+```swift
+List(ble.sensors) { sensor in
+    VStack(alignment: .leading, spacing: 4) {
+        // 感應器基礎資訊與裝置地址
+        Text("QR Code String: \(sensor.qrCodeString.prefix(10)) ...")
+        Text("Address: \(sensor.deviceAddress ?? "Unknown")")
+        
+        // 電量與物理狀態（門磁觸點狀態、防拆防破壞狀態）
+        Text("Battery: \(sensor.batteryPercentage)")
+        Text("Contact Status: \(sensor.contactStatus.rawValue)")
+        Text("Tamper Status: \(sensor.tamperStatus.rawValue)")
+        
+        // 數據最新更新時間戳記
+        Text("Updated Time: \(String(describing: sensor.updatedAt))")
+        
+        // ... 控制按鈕放置於此處
+    }
+}
+```
+
+### 步驟四：控制廣播監聽狀態（開始 / 停止）
+
+智能感應器主要透過藍牙廣播傳送狀態變更數據。使用感應器的 `qrCodeString` 標識開啟或停止對該裝置的廣播監聽：
+
+```swift
+HStack {
+    // 開啟裝置廣播監聽
+    Button("Start listening") {
+        ble.startListeningToSensor(qrCodeString: sensor.qrCodeString)
+    }
+    
+    // 停止裝置廣播監聽
+    Button("Stop listening") {
+        ble.stopListeningToSensor(qrCodeString: sensor.qrCodeString)
+    }
 }
 .buttonStyle(.borderedProminent)
-.tint(.green)
+```
+
+---
+
+## 4. PIR Sensor (人體感應器管理)
+
+### 步驟一：匯入框架與綁定 View 狀態
+
+使用 `BLEManager.shared` 單例物件統一管理感應器狀態。在 View 中建立必要的狀態綁定：
+
+```swift
+struct PIRSensorView: View {
+    // 監聽藍牙管理器單例
+    @StateObject var ble = BLEManager.shared
+    
+    // 綁定二維碼輸入框字串
+    @State var qrCode: String = ""
+    
+    var body: some View {
+        Form {
+            // 後續 UI 控制項依次放入 Form 中
+        }
+    }
+}
+```
+
+### 步驟二：實現 PIR 感應器註冊功能
+
+使用者輸入 PIR 感應器的二維碼字串（QR Code String）後，呼叫 `ble.register(for:)` 異步方法完成裝置註冊：
+
+```swift
+HStack {
+    TextField("QR Code String", text: $qrCode)
+    Button {
+        Task {
+            // 異步註冊 PIR 感應器
+            await ble.register(for: qrCode)
+        }
+    } label: {
+        Text("Register PIR Sensor")
+    }
+}
+```
+
+### 步驟三：實現數據監聽與環境多參數展示
+
+註冊成功後，PIR 感應器物件會自動推入 `ble.pirSensors` 列表中。走訪該陣列，可以即時讀取感應器上報的環境與裝置狀態：
+
+```swift
+List(ble.pirSensors) { pirsensor in
+    VStack(alignment: .leading, spacing: 4) {
+        // 1. 基礎資訊與裝置地址
+        Text("QR Code String: \(pirsensor.qrCodeString.prefix(10)) ...")
+        Text("Address: \(pirsensor.deviceAddress ?? "Unknown")")
+        
+        // 2. 環境及狀態監測參數（包含預設空值備用處理）
+        Text("Battery: \(pirsensor.battery ?? 0)")
+        Text("PIR State: \(pirsensor.pirState ?? "Unknown")")  // 人體感應狀態
+        Text("Humidity: \(pirsensor.humidity ?? 0)")           // 濕度
+        Text("Lumens: \(pirsensor.lumens ?? 0)")               // 光照度 (流明)
+        Text("Temperature: \(pirsensor.temperature ?? 0)")     // 溫度
+        
+        // 3. 三軸姿態數據 (XYZ Value)
+        if let x = pirsensor.xValue, let y = pirsensor.yValue, let z = pirsensor.zValue {
+            Text("XYZ value: \(x), \(y), \(z)")
+        }
+        
+        // 4. 最新更新時間戳記
+        Text("Updated Time: \(String(describing: pirsensor.lastUpdated))")
+        
+        // ... 控制按鈕放置於此處
+    }
+}
+```
+
+### 步驟四：控制廣播監聽狀態（開始 / 停止）
+
+PIR 感應器透過藍牙廣播即時上報姿態與環境數據。使用感應器的 `qrCodeString` 標識控制是否開啟廣播監聽：
+
+```swift
+HStack {
+    // 開啟對該 PIR 感應器的廣播監聽
+    Button("Start listening") {
+        ble.startListeningToSensor(qrCodeString: pirsensor.qrCodeString)
+    }
+    
+    // 停止對該 PIR 感應器的廣播監聽
+    Button("Stop listening") {
+        ble.stopListeningToSensor(qrCodeString: pirsensor.qrCodeString)
+    }
+}
+.buttonStyle(.borderedProminent)
 ```
