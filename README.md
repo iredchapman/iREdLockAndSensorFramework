@@ -7,28 +7,6 @@ description: This skill provides instructions and code snippets for integrating 
 
 本指南提供了在 SwiftUI 視圖中使用 `BLEManager` 與鎖具、一次性密碼 (OTP) 以及感應器進行互動的基礎代碼實現和高級管理方法。
 
-## **權限設定（Info.plist / Capabilities）**
-
-
-### **必填鍵值**
-
-
-- Privacy - Bluetooth Always Usage Description
-
-  例如：需要用藍牙連接鎖具和感應器
-
-- Privacy - Camera Usage Description
-
-  例如：用於掃描裝置二維碼
-
-
-### **示例截圖**
-
-<p align="center">
-  <img src="https://github.com/iredchapman/iREdLockAndSensorFramework/blob/main/images/add_permissions.png?raw=true" width="500" alt="添加藍牙權限範例">
-</p>
-
-
 ------
 
 ## Prerequisites (前提準備)
@@ -82,6 +60,7 @@ HStack {
     } label: {
         Text("Register Lock")
     }
+		.buttonStyle(.borderedProminent)
 }
 ```
 
@@ -90,37 +69,40 @@ HStack {
 透過走訪 `ble.locks` 獲取裝置列表，並針對單個鎖裝置綁定以下控制指令：
 
 ```swift
-List(ble.locks) { lock in
-    VStack(alignment: .leading, spacing: 4) {
-        // 1. 基礎資訊展示
-        Text("QR Code String: \(lock.qrCodeString.prefix(10)) ...")
-        Text("Address: \(lock.deviceAddress ?? "Unknown")")
-        Text("Pair Status: \(lock.pairStatus.rawValue)")
-        Text("Connect Status: \(lock.connectStatus.rawValue)")
-        Text("Battery: \(lock.batteryPercentage)")
-        Text("Lock Status: \(lock.lockStatus.rawValue)")
-        
-        // 2. 連接 / 斷開連接
-        HStack {
-            Button("Connect") {
-                ble.connect(identifier: lock.qrCodeString)
+VStack(alignment: .leading, spacing: 8) {
+    ForEach(ble.locks) { lock in
+        VStack(alignment: .leading, spacing: 4) {
+            // 1. 基礎資訊展示
+            Text("QR Code String: \(lock.qrCodeString.prefix(10)) ...")
+            Text("Address: \(lock.deviceAddress ?? "Unknown")")
+            Text("Pair Status: \(lock.pairStatus.rawValue)")
+            Text("Connect Status: \(lock.connectStatus.rawValue)")
+            Text("Battery: \(lock.batteryPercentage)")
+            Text("Lock Status: \(lock.lockStatus.rawValue)")
+            
+            // 2. 連接 / 斷開連接
+            HStack {
+                Button("Connect") {
+                    ble.connect(identifier: lock.qrCodeString)
+                }
+                Button("Disconnect") {
+                    ble.disconnect(identifier: lock.qrCodeString)
+                }
             }
-            Button("Disconnect") {
-                ble.disconnect(identifier: lock.qrCodeString)
-            }
-        }
-        
-        // 3. 開鎖 / 查詢狀態
-        HStack {
-            Button("Unlock") {
-                ble.unlock(identifier: lock.qrCodeString)
-            }
-            Button("Query Status") {
-                ble.queryStatus(identifier: lock.qrCodeString)
+            
+            // 3. 開鎖 / 查詢狀態
+            HStack {
+                Button("Unlock") {
+                    ble.unlock(identifier: lock.qrCodeString)
+                }
+                Button("Query Status") {
+                    ble.queryStatus(identifier: lock.qrCodeString)
+                }
             }
         }
     }
 }
+.buttonStyle(.borderedProminent)
 ```
 
 ### 步驟四：實現 IC/ID 卡管理
@@ -147,6 +129,7 @@ HStack {
         ble.queryCardCount(identifier: lock.qrCodeString)
     }
 }
+.buttonStyle(.borderedProminent)
 ```
 
 ### 步驟五：實現 OTP 動態密碼生成與作廢
@@ -176,21 +159,24 @@ HStack {
     Button("Invalidate OTP") {
         ble.invalidateOTP(otp: invalidateOTPString)
     }
+		.buttonStyle(.borderedProminent)
 }
 ```
 
 #### 3. 展示裝置目前的 OTP 列表
 
 ```swift
-List(lock.otpList) { otp in
-    HStack {
-        Text(otp.otp).textSelection(.enabled)
-        let dateString = DateFormatter.localizedString(
-            from: Date(timeIntervalSince1970: TimeInterval(otp.exp)), 
-            dateStyle: .medium, 
-            timeStyle: .medium
-        )
-        Text("Exp Date: \(dateString)")
+VStack(alignment: .leading, spacing: 4) {
+    ForEach(lock.otpList) { otp in
+        HStack {
+            Text(otp.otp).textSelection(.enabled)
+            let dateString = DateFormatter.localizedString(
+                from: Date(timeIntervalSince1970: TimeInterval(otp.exp)), 
+                dateStyle: .medium, 
+                timeStyle: .medium
+            )
+            Text("Exp Date: \(dateString)")
+        }
     }
 }
 ```
@@ -251,6 +237,7 @@ HStack {
     } label: {
         Text("Register OTP")
     }
+		.buttonStyle(.borderedProminent)
 }
 
 // 即時顯示註冊結果狀態
@@ -262,20 +249,24 @@ Text("Register Success: \(String(describing: isRegisterSuccess))")
 當透過 OTP 成功註冊鎖後，`ble.otpLocks` 陣列會自動包含該鎖的資訊。走訪該列表可以即時展示裝置狀態：
 
 ```swift
-List(ble.otpLocks) { otpLock in
-    // 配對狀態
-    Text("Pair Status: \(otpLock.pairStatus.rawValue)")
-    
-    // 連接狀態
-    Text("Connect Status: \(otpLock.connectStatus.rawValue)")
-    
-    // 電池電量
-    Text("Battery: \(otpLock.batteryPercentage)")
-    
-    // 鎖開合狀態
-    Text("Lock Status: \(otpLock.lockStatus.rawValue)")
-    
-    // ... 後續操作按鈕放置於此處
+VStack(alignment: .leading, spacing: 8) {
+    ForEach(ble.otpLocks) { otpLock in
+        VStack(alignment: .leading, spacing: 4) {
+            // 配對狀態
+            Text("Pair Status: \(otpLock.pairStatus.rawValue)")
+            
+            // 連接狀態
+            Text("Connect Status: \(otpLock.connectStatus.rawValue)")
+            
+            // 電池電量
+            Text("Battery: \(otpLock.batteryPercentage)")
+            
+            // 鎖開合狀態
+            Text("Lock Status: \(otpLock.lockStatus.rawValue)")
+            
+            // ... 後續操作按鈕放置於此處
+        }
+    }
 }
 ```
 
@@ -339,6 +330,7 @@ HStack {
     } label: {
         Text("Register Sensor")
     }
+		.buttonStyle(.borderedProminent)
 }
 ```
 
@@ -347,21 +339,23 @@ HStack {
 註冊完成後，感應器物件會自動推入 `ble.sensors` 列表中。走訪該陣列，可以讀取並即時展示感應器的物理狀態與更新時間：
 
 ```swift
-List(ble.sensors) { sensor in
-    VStack(alignment: .leading, spacing: 4) {
-        // 感應器基礎資訊與裝置地址
-        Text("QR Code String: \(sensor.qrCodeString.prefix(10)) ...")
-        Text("Address: \(sensor.deviceAddress ?? "Unknown")")
-        
-        // 電量與物理狀態（門磁觸點狀態、防拆防破壞狀態）
-        Text("Battery: \(sensor.batteryPercentage)")
-        Text("Contact Status: \(sensor.contactStatus.rawValue)")
-        Text("Tamper Status: \(sensor.tamperStatus.rawValue)")
-        
-        // 數據最新更新時間戳記
-        Text("Updated Time: \(String(describing: sensor.updatedAt))")
-        
-        // ... 控制按鈕放置於此處
+VStack(alignment: .leading, spacing: 8) {
+    ForEach(ble.sensors) { sensor in
+        VStack(alignment: .leading, spacing: 4) {
+            // 感應器基礎資訊與裝置地址
+            Text("QR Code String: \(sensor.qrCodeString.prefix(10)) ...")
+            Text("Address: \(sensor.deviceAddress ?? "Unknown")")
+            
+            // 電量與物理狀態（門磁觸點狀態、防拆防破壞狀態）
+            Text("Battery: \(sensor.batteryPercentage)")
+            Text("Contact Status: \(sensor.contactStatus.rawValue)")
+            Text("Tamper Status: \(sensor.tamperStatus.rawValue)")
+            
+            // 數據最新更新時間戳記
+            Text("Updated Time: \(String(describing: sensor.updatedAt))")
+            
+            // ... 控制按鈕放置於此處
+        }
     }
 }
 ```
@@ -432,28 +426,30 @@ HStack {
 註冊成功後，PIR 感應器物件會自動推入 `ble.pirSensors` 列表中。走訪該陣列，可以即時讀取感應器上報的環境與裝置狀態：
 
 ```swift
-List(ble.pirSensors) { pirsensor in
-    VStack(alignment: .leading, spacing: 4) {
-        // 1. 基礎資訊與裝置地址
-        Text("QR Code String: \(pirsensor.qrCodeString.prefix(10)) ...")
-        Text("Address: \(pirsensor.deviceAddress ?? "Unknown")")
-        
-        // 2. 環境及狀態監測參數（包含預設空值備用處理）
-        Text("Battery: \(pirsensor.battery ?? 0)")
-        Text("PIR State: \(pirsensor.pirState ?? "Unknown")")  // 人體感應狀態
-        Text("Humidity: \(pirsensor.humidity ?? 0)")           // 濕度
-        Text("Lumens: \(pirsensor.lumens ?? 0)")               // 光照度 (流明)
-        Text("Temperature: \(pirsensor.temperature ?? 0)")     // 溫度
-        
-        // 3. 三軸姿態數據 (XYZ Value)
-        if let x = pirsensor.xValue, let y = pirsensor.yValue, let z = pirsensor.zValue {
-            Text("XYZ value: \(x), \(y), \(z)")
+VStack(alignment: .leading, spacing: 8) {
+    ForEach(ble.pirSensors) { pirsensor in
+        VStack(alignment: .leading, spacing: 4) {
+            // 1. 基礎資訊與裝置地址
+            Text("QR Code String: \(pirsensor.qrCodeString.prefix(10)) ...")
+            Text("Address: \(pirsensor.deviceAddress ?? "Unknown")")
+            
+            // 2. 環境及狀態監測參數（包含預設空值備用處理）
+            Text("Battery: \(pirsensor.battery ?? 0)")
+            Text("PIR State: \(pirsensor.pirState ?? "Unknown")")  // 人體感應狀態
+            Text("Humidity: \(pirsensor.humidity ?? 0)")           // 濕度
+            Text("Lumens: \(pirsensor.lumens ?? 0)")               // 光照度 (流明)
+            Text("Temperature: \(pirsensor.temperature ?? 0)")     // 溫度
+            
+            // 3. 三軸姿態數據 (XYZ Value)
+            if let x = pirsensor.xValue, let y = pirsensor.yValue, let z = pirsensor.zValue {
+                Text("XYZ value: \(x), \(y), \(z)")
+            }
+            
+            // 4. 最新更新時間戳記
+            Text("Updated Time: \(String(describing: pirsensor.lastUpdated))")
+            
+            // ... 控制按鈕放置於此處
         }
-        
-        // 4. 最新更新時間戳記
-        Text("Updated Time: \(String(describing: pirsensor.lastUpdated))")
-        
-        // ... 控制按鈕放置於此處
     }
 }
 ```
