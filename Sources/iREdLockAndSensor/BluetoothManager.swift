@@ -1,7 +1,7 @@
 import Foundation
 import CoreBluetooth
 import Combine
-import LockAndSensorFramework
+// import LockAndSensorFramework
 
 @MainActor
 public final class BLEManager: NSObject, ObservableObject, @unchecked Sendable {
@@ -87,7 +87,7 @@ public final class BLEManager: NSObject, ObservableObject, @unchecked Sendable {
     
     public func unlock(identifier: String) {
         guard let deviceAddress = resolveMACAddress(from: identifier) else { return }
-        if let lock = locks.first(where: { $0.deviceAddress == deviceAddress }) {
+        if let lock = locks.first(where: { $0.qrCodeString == identifier }) { // Local Lock 只会传递 qrcode
             // Lock
             guard let peripheral = lock.blePeripheralInfo?.peripheral,
                   let writeCh = lock.blePeripheralInfo?.writeCharacteristic else { return }
