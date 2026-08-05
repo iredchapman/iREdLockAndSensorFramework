@@ -18,6 +18,7 @@ public struct PIRSensorDeviceModel: Identifiable {
     public var isListening: Bool = false    // 是否开启监听
     
     public var blePeripheralInfo: BLEPeripheralInfo?
+    public var customName: String = "PIR Sensor-\(Int.random(in: 10000...99999))"
     
     public init(
         qrCodeString: String,

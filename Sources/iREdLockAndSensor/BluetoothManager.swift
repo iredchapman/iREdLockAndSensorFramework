@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 import CoreBluetooth
 import Combine
 #if canImport(LockAndSensorFramework)
@@ -18,6 +19,14 @@ public final class BLEManager: NSObject, ObservableObject, @unchecked Sendable {
     @Published public var sensors: [iREdSensorModel] = []
     @Published public var otpLocks: [iREdOtpLockModel] = []
     @Published public var pirSensors: [PIRSensorDeviceModel] = []
+    private let kDevicesIdentifiablesKey = "devicesIdentifiables"
+    private var devicesIdentifiables: [DeviceItem] {
+        didSet {
+            if let data = try? JSONEncoder().encode(devicesIdentifiables) {
+                UserDefaults.standard.set(data, forKey: kDevicesIdentifiablesKey)
+            }
+        }
+    }
     
     private var activePeripheral: CBPeripheral? = nil
     
@@ -30,12 +39,24 @@ public final class BLEManager: NSObject, ObservableObject, @unchecked Sendable {
     override init() {
         self.lockAndSensor = LockAndSensor()
         self.pirSensor = PIRSensor()
-        
+        if let data = UserDefaults.standard.data(forKey: kDevicesIdentifiablesKey),
+           let items = try? JSONDecoder().decode([DeviceItem].self, from: data) {
+            self.devicesIdentifiables = items
+        } else {
+            self.devicesIdentifiables = []
+        }
+        print("devicesIdentifiables: \(devicesIdentifiables)")
         super.init()
         
         central = CBCentralManager(delegate: self, queue: .main)
         LockAndSensor.delegate = self
         self.pirSensor.delegate = self
+        
+        for devicesIdentifiable in devicesIdentifiables {
+            Task {
+                await register(for: devicesIdentifiable.identifier)
+            }
+        }
     }
     
     public func startListeningToSensor(qrCodeString: String) {
@@ -184,9 +205,18 @@ public final class BLEManager: NSObject, ObservableObject, @unchecked Sendable {
         switch getDeviceType(identifier: identifier) {
         case .lock:
             let (qrCodeString, deviceAddress, isSuccess) = self.lockAndSensor.setLockCredentials(fromQRCode: identifier)
-            if isSuccess, let deviceAddress, !locks.contains(where: { $0.qrCodeString == qrCodeString }) {
-                locks.append(iREdLockModel(qrCodeString: qrCodeString, deviceAddress: deviceAddress))
+            if isSuccess, let deviceAddress {
+                if !locks.contains(where: { $0.qrCodeString == qrCodeString }) {
+                    var lock = iREdLockModel(qrCodeString: qrCodeString, deviceAddress: deviceAddress)
+                    if let customName = devicesIdentifiables.first(where: { $0.identifier == identifier })?.customName {
+                        lock.customName = customName
+                    } else {
+                        devicesIdentifiables.append(DeviceItem(identifier: identifier, customName: lock.customName))
+                    }
+                    locks.append(lock)
+                }
             }
+            
             return isSuccess
             
         case .otp:
@@ -199,11 +229,16 @@ public final class BLEManager: NSObject, ObservableObject, @unchecked Sendable {
             return isSuccess
         case .sensor:
             // 1. 尝试门磁 (Door Sensor)
-            // print("开始 Register Door sensor")
             let (qr1, addr1, ok1) = lockAndSensor.setSensorCredentials(fromQRCode: identifier)
             if ok1, let addr1 {
                 if !sensors.contains(where: { $0.qrCodeString == qr1 }) {
-                    sensors.append(iREdSensorModel(qrCodeString: qr1, deviceAddress: addr1))
+                    var sensor = iREdSensorModel(qrCodeString: qr1, deviceAddress: addr1)
+                    if let customName = devicesIdentifiables.first(where: { $0.identifier == identifier })?.customName {
+                        sensor.customName = customName
+                    } else {
+                        devicesIdentifiables.append(DeviceItem(identifier: identifier, customName: sensor.customName))
+                    }
+                    sensors.append(sensor)
                 }
                 return true
             }
@@ -212,7 +247,13 @@ public final class BLEManager: NSObject, ObservableObject, @unchecked Sendable {
             let (qr2, addr2, ok2) = pirSensor.setSensorCredentials(fromQRCode: identifier)
             if ok2, let addr2 {
                 if !pirSensors.contains(where: { $0.qrCodeString == qr2 }) {
-                    pirSensors.append(PIRSensorDeviceModel(qrCodeString: qr2, deviceAddress: addr2))
+                    var pirSensor = PIRSensorDeviceModel(qrCodeString: qr2, deviceAddress: addr2)
+                    if let customName = devicesIdentifiables.first(where: { $0.identifier == identifier })?.customName {
+                        pirSensor.customName = customName
+                    } else {
+                        devicesIdentifiables.append(DeviceItem(identifier: identifier, customName: pirSensor.customName))
+                    }
+                    pirSensors.append(pirSensor)
                 }
                 return true
             }
@@ -220,6 +261,27 @@ public final class BLEManager: NSObject, ObservableObject, @unchecked Sendable {
             return false
         case .unknown:
             return false
+        }
+    }
+    
+    public func setName(for identifier: String, name: String) {
+        if let idx = devicesIdentifiables.firstIndex(where: { $0.identifier == identifier }) {
+            devicesIdentifiables[idx].customName = name
+        }
+        switch getDeviceType(identifier: identifier) {
+        case .lock:
+            if let idx = locks.firstIndex(where: { $0.qrCodeString == identifier }) {
+                locks[idx].customName = name
+            }
+        case .sensor:
+            if let idx = sensors.firstIndex(where: { $0.qrCodeString == identifier }) {
+                sensors[idx].customName = name
+            }
+            if let idx = pirSensors.firstIndex(where: { $0.qrCodeString == identifier }) {
+                pirSensors[idx].customName = name
+            }
+        default:
+            break
         }
     }
     
@@ -595,7 +657,7 @@ extension BLEManager {
     }
 }
 
-// MARK: LOCK Public Function
+// MARK: LOCK
 extension BLEManager {
     
     @discardableResult
@@ -644,4 +706,21 @@ extension BLEManager {
         }
         return otpLocks.filter { $0.otp == identifier }.first
     }
+}
+
+// Remove
+public extension BLEManager {
+    func remove(for identifier: String) {
+        locks.removeAll { $0.qrCodeString == identifier }
+        sensors.removeAll { $0.qrCodeString == identifier }
+        pirSensors.removeAll { $0.qrCodeString == identifier }
+        devicesIdentifiables.removeAll { $0.identifier == identifier }
+    }
+}
+
+
+struct DeviceItem: Identifiable, Codable {
+    var id: String { identifier }
+    let identifier: String
+    var customName: String
 }

@@ -23,10 +23,6 @@ public struct iREdSensorModel: Identifiable {
     public var tamperStatus: TamperStatus = .unknown
     
     public var updatedAt: Date? = Date()
-    
-    public var customName: String?
-    public var customLabel: String?
-    public var customDescription: String?
 
     public init(qrCodeString: String, deviceAddress: String? = nil) {
         self.qrCodeString = qrCodeString
@@ -34,5 +30,6 @@ public struct iREdSensorModel: Identifiable {
     }
     
     public var blePeripheralInfo: BLEPeripheralInfo?
-    public var isListening: Bool = false    // 是否开启监听
+    public var isListening: Bool = false
+    public var customName: String = "Door Sensor-\(Int.random(in: 10000...99999))"
 }
