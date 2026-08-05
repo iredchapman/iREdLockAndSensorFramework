@@ -1,7 +1,9 @@
 import Foundation
 import CoreBluetooth
 import Combine
+#if canImport(LockAndSensorFramework)
 import LockAndSensorFramework
+#endif
 
 @MainActor
 public final class BLEManager: NSObject, ObservableObject, @unchecked Sendable {
@@ -55,8 +57,6 @@ public final class BLEManager: NSObject, ObservableObject, @unchecked Sendable {
         }
     }
     
-    @Published private var isOTPLock: Bool = false
-    
     public func connect(identifier: String) {
         guard central.state == .poweredOn, let deviceAddress = resolveMACAddress(from: identifier) else {
             return
@@ -67,13 +67,11 @@ public final class BLEManager: NSObject, ObservableObject, @unchecked Sendable {
                 ol.pairStatus = .pairing
                 ol.isConnection = true
             }
-            isOTPLock = true
         } else {
             updateLock(deviceAddress: deviceAddress) { l in
                 l.pairStatus = .pairing
                 l.isConnection = true
             }
-            isOTPLock = false
         }
         
         central.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
@@ -186,7 +184,7 @@ public final class BLEManager: NSObject, ObservableObject, @unchecked Sendable {
         switch getDeviceType(identifier: identifier) {
         case .lock:
             let (qrCodeString, deviceAddress, isSuccess) = self.lockAndSensor.setLockCredentials(fromQRCode: identifier)
-            if isSuccess, let deviceAddress {
+            if isSuccess, let deviceAddress, !locks.contains(where: { $0.qrCodeString == qrCodeString }) {
                 locks.append(iREdLockModel(qrCodeString: qrCodeString, deviceAddress: deviceAddress))
             }
             return isSuccess
@@ -204,14 +202,18 @@ public final class BLEManager: NSObject, ObservableObject, @unchecked Sendable {
             // print("开始 Register Door sensor")
             let (qr1, addr1, ok1) = lockAndSensor.setSensorCredentials(fromQRCode: identifier)
             if ok1, let addr1 {
-                sensors.append(iREdSensorModel(qrCodeString: qr1, deviceAddress: addr1))
+                if !sensors.contains(where: { $0.qrCodeString == qr1 }) {
+                    sensors.append(iREdSensorModel(qrCodeString: qr1, deviceAddress: addr1))
+                }
                 return true
             }
             
             // 2. 尝试 PIR (PIR Sensor)
             let (qr2, addr2, ok2) = pirSensor.setSensorCredentials(fromQRCode: identifier)
             if ok2, let addr2 {
-                pirSensors.append(PIRSensorDeviceModel(qrCodeString: qr2, deviceAddress: addr2))
+                if !pirSensors.contains(where: { $0.qrCodeString == qr2 }) {
+                    pirSensors.append(PIRSensorDeviceModel(qrCodeString: qr2, deviceAddress: addr2))
+                }
                 return true
             }
             
@@ -245,7 +247,6 @@ extension BLEManager: @preconcurrency CBCentralManagerDelegate {
     }
     
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        // TODO: 如果lock 和 sensor都没有 需要 连接 或监听的 停止扫描（需要考虑OTP LOCK）
         var isScanning: Bool {
             locks.contains { $0.isConnection } ||
             otpLocks.contains { $0.isConnection } ||
@@ -255,9 +256,9 @@ extension BLEManager: @preconcurrency CBCentralManagerDelegate {
         //        print("locks isConnection: \(locks.contains(where: { $0.isConnection }))")
         //        print("otpLocks isConnection: \(otpLocks.contains(where: { $0.isConnection }))")
         //        print("sensors isListening: \(sensors.contains(where: { $0.isListening }))")
-        //        print("pirSensors isListening: \(pirSensors.contains(where: { $0.isListening }))")
+//                print("pirSensors isListening: \(pirSensors.contains(where: { $0.isListening }))")
         if !isScanning {
-            // print("没有任何设备需要监听")
+//             print("没有任何设备需要监听")
             return
         }
         
