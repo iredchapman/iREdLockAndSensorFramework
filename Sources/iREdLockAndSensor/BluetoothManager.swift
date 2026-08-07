@@ -642,21 +642,6 @@ extension BLEManager {
     }
 }
 
-extension BLEManager {
-    fileprivate func getMacAddressByPeripheralUUIDString(uuidString: String) -> String? {
-        if let deviceAddress = locks.first(where: { $0.blePeripheralInfo?.peripheral.identifier.uuidString == uuidString })?.deviceAddress {
-            return deviceAddress
-        } else if let deviceAddress = otpLocks.first(where: { $0.blePeripheralInfo?.peripheral.identifier.uuidString == uuidString })?.deviceAddress {
-            return deviceAddress
-        } else if let deviceAddress = sensors.first(where: { $0.blePeripheralInfo?.peripheral.identifier.uuidString == uuidString })?.deviceAddress {
-            return deviceAddress
-        } else if let deviceAddress = pirSensors.first(where: { $0.blePeripheralInfo?.peripheral.identifier.uuidString == uuidString })?.deviceAddress {
-            return deviceAddress
-        }
-        return nil // 找不到时返回 nil
-    }
-}
-
 // MARK: LOCK
 extension BLEManager {
     
