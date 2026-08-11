@@ -49,4 +49,5 @@ public struct iREdLockModel: Identifiable {
     public var blePeripheralInfo: BLEPeripheralInfo?
     public var isConnection: Bool = false
     public var customName: String = "Lock-\(Int.random(in: 10000...99999))"
+    public var cardMessage: String = "Unknown"
 }

@@ -19,6 +19,7 @@ public final class BLEManager: NSObject, ObservableObject, @unchecked Sendable {
     @Published public var sensors: [iREdSensorModel] = []
     @Published public var otpLocks: [iREdOtpLockModel] = []
     @Published public var pirSensors: [PIRSensorDeviceModel] = []
+    
     private let kDevicesIdentifiablesKey = "devicesIdentifiables"
     private var devicesIdentifiables: [DeviceItem] {
         didSet {
@@ -137,7 +138,6 @@ public final class BLEManager: NSObject, ObservableObject, @unchecked Sendable {
         guard let writeCh = locks.first(where: { $0.deviceAddress == deviceAddress })?.blePeripheralInfo?.writeCharacteristic else { return }
         guard let cmd = try? self.lockAndSensor.BLE_AddCardCommand(deviceAddress: deviceAddress) else { return }
         peripheral.writeValue(cmd, for: writeCh, type: .withResponse)
-        // "请将卡片靠近锁具识别区"
     }
     
     public func queryCardCount(identifier: String) {
@@ -512,10 +512,13 @@ extension BLEManager: @preconcurrency LockAndSensorFrameworkDelegate {
                 l.lockStatus = isLocked ? .normalClose : .normallyOpen
             }
             
-        case .addCardEvent(_, let isSuccess, let cardType):
+        case .addCardEvent(let deviceAddress, let isSuccess, let cardType):
             let message = isSuccess
             ? "Card added successfully ✅ (\(cardType == .ic ? "IC Card" : "ID Card"))"
             : "Failed to add card ❌"
+            updateLock(deviceAddress: deviceAddress) { l in
+                l.cardMessage = message
+            }
             
         case .deleteAllCardEvent(let deviceAddress, let isSuccess):
             let message = isSuccess
@@ -528,12 +531,17 @@ extension BLEManager: @preconcurrency LockAndSensorFrameworkDelegate {
                     l.updatedAt = Date()
                 }
             }
+            updateLock(deviceAddress: deviceAddress) { l in
+                l.cardMessage = message
+            }
+            
             
         case .queryCardCountEvent(let deviceAddress, let ic, let id):
             updateLock(deviceAddress: deviceAddress) { l in
                 l.icCardCount = ic
                 l.idCardCount = id
                 l.updatedAt = Date()
+                l.cardMessage = "IC Card Count: \(ic), ID Card Count: \(id)"
             }
             
         case .otpInvalidateOTPEvent(let otp, let isSuccess):
@@ -577,31 +585,23 @@ extension BLEManager {
     }
     
     private func resolveMACAddress(from identifier: String) -> String? {
-        // print("[BLEManager] [resolveMACAddress] 尝试解析 identifier: \(identifier)")
-        
         if isValidMACAddress(identifier) {
-            // print("[BLEManager] [resolveMACAddress] identifier 本身为有效的 MAC 地址: \(identifier)")
             return identifier
         }
         
         if let lock = locks.first(where: { $0.qrCodeString == identifier }) {
             if let foundMAC = lock.deviceAddress {
-                // print("[BLEManager] [resolveMACAddress] 在 locks 中通过 qrCodeString 匹配到 MAC 地址: \(foundMAC)")
                 return foundMAC
             }
         }
         
         if let foundMAC = otpLocks.first(where: { $0.otp == identifier })?.deviceAddress {
-            // print("[BLEManager] [resolveMACAddress] 在 otpLocks 中通过 otp 匹配到 MAC 地址: \(foundMAC)")
             return foundMAC
         }
         
         if let foundMAC = pirSensors.first(where: { $0.deviceAddress == identifier })?.deviceAddress {
-            // print("[BLEManager] [resolveMACAddress] 在 pirSensors 中通过 deviceAddress 匹配到 MAC 地址: \(foundMAC)")
             return foundMAC
         }
-        
-        // print("[BLEManager] [resolveMACAddress] 未找到匹配的 MAC 地址: \(identifier)")
         return nil
     }
 }
@@ -634,7 +634,7 @@ extension BLEManager {
     public func addPIRSensor(qrCodeString: String) {
         guard qrCodeString.isValidMACAddress else { return }
         if !pirSensors.contains(where: { $0.qrCodeString == qrCodeString }) {
-            var item = PIRSensorDeviceModel(qrCodeString: qrCodeString)
+            let item = PIRSensorDeviceModel(qrCodeString: qrCodeString)
             self.pirSensors.append(item)
             guard central.state == .poweredOn else { return }
             central.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])

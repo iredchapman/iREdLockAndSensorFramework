@@ -82,6 +82,7 @@ ForEach(ble.locks) { lock in
             Text("Lock Status: \(lock.lockStatus.rawValue)")
             Text("IC Card Count: \(lock.icCardCount)")
             Text("ID Card Count: \(lock.idCardCount)")
+            Text("Card Message: \(lock.cardMessage)")
             Text("Updated Time: \(String(describing: lock.updatedAt))")
         }
         
@@ -114,7 +115,12 @@ ForEach(ble.locks) { lock in
 智能鎖支援讀取、清空及查詢卡片資訊：
 
 ```swift
-// 卡片操作按鈕組
+// 1. 卡片資訊與反饋展示
+Text("IC Card Count: \(lock.icCardCount)")
+Text("ID Card Count: \(lock.idCardCount)")
+Text("Card Message: \(lock.cardMessage)")
+
+// 2. 卡片操作按鈕組
 VStack(alignment: .leading) {
     HStack {
         // 進入錄卡模式
