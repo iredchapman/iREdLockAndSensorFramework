@@ -315,56 +315,50 @@ extension BLEManager: @preconcurrency CBCentralManagerDelegate {
             sensors.contains { $0.isListening } ||
             pirSensors.contains { $0.isListening }
         }
-        //        print("locks isConnection: \(locks.contains(where: { $0.isConnection }))")
-        //        print("otpLocks isConnection: \(otpLocks.contains(where: { $0.isConnection }))")
-        //        print("sensors isListening: \(sensors.contains(where: { $0.isListening }))")
-//                print("pirSensors isListening: \(pirSensors.contains(where: { $0.isListening }))")
+        
         if !isScanning {
-//             print("没有任何设备需要监听")
+            print("No device needs to be monitored")
             return
         }
         
-        if let mfg = advertisementData[CBAdvertisementDataManufacturerDataKey] as? Data {
-            // Lock
-            if let mac = LockAndSensor.isLock(peripheral: peripheral, manufacturerData: mfg) {
-                if let l = locks.filter({ $0.deviceAddress == mac }).first {
-                    if l.isConnection {
-                        self.activePeripheral = peripheral
-                        if let p = self.activePeripheral {
-                            central.connect(p, options: nil)
-                        }
-                        updateLock(deviceAddress: mac) { l in
-                            l.blePeripheralInfo = BLEPeripheralInfo(peripheral: peripheral)
-                        }
+        // Lock
+        if let mac = LockAndSensor.isLock(peripheral: peripheral, advertisementData: advertisementData) {
+            if let l = locks.filter({ $0.deviceAddress == mac }).first {
+                if l.isConnection {
+                    self.activePeripheral = peripheral
+                    if let p = self.activePeripheral {
+                        central.connect(p, options: nil)
+                    }
+                    updateLock(deviceAddress: mac) { l in
+                        l.blePeripheralInfo = BLEPeripheralInfo(peripheral: peripheral)
                     }
                 }
             }
-            
-            // OTP
-            if let mac = LockAndSensor.getLockMAC(manufacturerData: mfg) {
-                if let ol = otpLocks.filter({ $0.deviceAddress == mac }).first {
-                    if ol.isConnection {
-                        self.activePeripheral = peripheral
-                        if let p = self.activePeripheral {
-                            central.connect(p, options: nil)
-                        }
-                        updateOtpLock(deviceAddress: mac) { ol in
-                            ol.blePeripheralInfo = BLEPeripheralInfo(peripheral: peripheral)
-                        }
+        }
+        
+        // OTP
+        if let mac = LockAndSensor.getLockMAC(peripheral: peripheral, advertisementData: advertisementData) {
+            if let ol = otpLocks.filter({ $0.deviceAddress == mac }).first {
+                if ol.isConnection {
+                    self.activePeripheral = peripheral
+                    if let p = self.activePeripheral {
+                        central.connect(p, options: nil)
+                    }
+                    updateOtpLock(deviceAddress: mac) { ol in
+                        ol.blePeripheralInfo = BLEPeripheralInfo(peripheral: peripheral)
                     }
                 }
             }
-            
-            // Door Sensor
-            if LockAndSensor.isSensor(peripheral: peripheral, manufacturerData: mfg) {
-                LockAndSensor.handleSensorBroadcast(peripheral: peripheral, manufacturerData: mfg)
-            }
+        }
+        
+        // Door Sensor
+        if LockAndSensor.isSensor(peripheral: peripheral, advertisementData: advertisementData) {
+            LockAndSensor.handleSensorBroadcast(peripheral: peripheral, advertisementData: advertisementData)
         }
         
         // PIR Sensor
         let listeningMacs = self.pirSensors.filter { $0.isListening && $0.deviceAddress != nil }.compactMap { $0.deviceAddress }
         pirSensor.process(peripheral: peripheral, advertisementData: advertisementData, rssi: RSSI.intValue, macAddressList: listeningMacs)
-        
     }
     
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -373,7 +367,7 @@ extension BLEManager: @preconcurrency CBCentralManagerDelegate {
         if let idx = otpLocks.firstIndex(where: { $0.blePeripheralInfo?.peripheral.identifier.uuidString == peripheral.identifier.uuidString && $0.isConnection }) {
             otpLocks[idx].connectStatus = .connected
         }
-        if let mac = LockAndSensor.isLock(peripheral: peripheral, manufacturerData: nil)  {
+        if let mac = LockAndSensor.isLock(peripheral: peripheral, advertisementData: nil)  {
             updateLock(deviceAddress: mac) { l in
                 l.connectStatus = .connected
             }
@@ -381,7 +375,7 @@ extension BLEManager: @preconcurrency CBCentralManagerDelegate {
     }
     
     public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        if let mac = LockAndSensor.isLock(peripheral: peripheral, manufacturerData: nil) {
+        if let mac = LockAndSensor.isLock(peripheral: peripheral, advertisementData: nil) {
             updateLock(deviceAddress: mac) { l in
                 l.connectStatus = .connectionFailed
             }
@@ -389,7 +383,7 @@ extension BLEManager: @preconcurrency CBCentralManagerDelegate {
     }
     
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        if let mac = LockAndSensor.isLock(peripheral: peripheral, manufacturerData: nil) {
+        if let mac = LockAndSensor.isLock(peripheral: peripheral, advertisementData: nil) {
             updateLock(deviceAddress: mac) { l in
                 l.isConnection = false
                 l.connectStatus = .disconnected
@@ -427,7 +421,7 @@ extension BLEManager: @preconcurrency CBPeripheralDelegate {
                             peripheral.writeValue(cmd, for: ch, type: .withResponse)
                         }
                     }
-                } else if let mac = LockAndSensor.isLock(peripheral: peripheral, manufacturerData: nil) {
+                } else if let mac = LockAndSensor.isLock(peripheral: peripheral, advertisementData: nil) {
                     updateLock(deviceAddress: mac) { l in
                         if l.blePeripheralInfo != nil {
                             l.blePeripheralInfo?.writeCharacteristic = ch
@@ -449,7 +443,7 @@ extension BLEManager: @preconcurrency CBPeripheralDelegate {
     
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         guard error == nil, let data = characteristic.value else { return }
-        if let mac = LockAndSensor.isLock(peripheral: peripheral, manufacturerData: nil) {
+        if let mac = LockAndSensor.isLock(peripheral: peripheral, advertisementData: nil) {
             self.lockAndSensor.decodBleLockData(peripheral: peripheral, encrypted: data)
         }
         // OTP
@@ -574,11 +568,11 @@ extension BLEManager {
         guard string.count == 17 else {
             return false
         }
-
+        
         guard string.contains(":") else {
             return false
         }
-
+        
         return string.allSatisfy {
             $0.isNumber || $0.isLetter || $0 == ":"
         }
